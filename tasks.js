@@ -87,6 +87,7 @@ function getSelectors(){
     taskPomodoroBtn = document.querySelector('#tasks__pomodoroBtn')
     taskCompleteBtn = document.querySelector('#tasks__complete')
     taskBackBtn = document.querySelector('#tasks__back')
+    taskProgressBtn = document.querySelector('#tasks__progress')
     
     taskEditBtn.addEventListener('click', editThisTask)
     taskDeleteBtn.addEventListener('click', deleteThisTask)
@@ -95,6 +96,7 @@ function getSelectors(){
     taskPomodoroBtn.addEventListener('click',showPomodoroUI)
     taskCompleteBtn.addEventListener('click', completeThisTask)
     taskBackBtn.addEventListener('click',goBackToTaskList)
+    taskProgressBtn.addEventListener('click',changeTaskProgress)
     
     document.body.addEventListener('click', quickCompleteTask);
     document.body.addEventListener('click', selectTask);
@@ -289,6 +291,76 @@ function goBackToTaskList(){
     showProject()
 }
 
+function changeTaskProgress(){
+    select = document.createElement('select')
+    sumbit = document.createElement('button')
+
+
+    a = document.createElement('option')
+    b = document.createElement('option')
+    c = document.createElement('option')
+    d = document.createElement('option')
+
+    a.innerHTML = 'Task Backlog'
+    b.innerHTML = 'Buffer Zone '
+    c.innerHTML = 'In Progress'
+    d.innerHTML = 'Done'
+
+    select.appendChild(a)
+    select.appendChild(b)
+    select.appendChild(c)
+    select.appendChild(d)
+
+
+    select.id = 'progress-select'
+
+    sumbit.innerHTML = 'Submit'
+    sumbit.id = 'submit-progress'
+    sumbit.classList = 'btn green'
+
+    sumbit.addEventListener('click',submitChangeTaskProgress)
+
+    taskInfoPanel = document.querySelector('.tasks__selected-task--info')
+
+    parent = taskInfoPanel.parentNode
+
+    parent.insertBefore(select,taskInfoPanel)
+    parent.insertBefore(sumbit,taskInfoPanel)
+}
+
+function submitChangeTaskProgress(){
+   newProgress = document.querySelector('#progress-select').value
+
+    taskID = data.currentTask.id
+    projectID = data.currentProject.id
+
+    
+
+    // taskInCP.progress = newProgress
+   data.currentTask.progress = newProgress
+   taskInData = findTaskInProjectFolder(taskID,projectID)
+
+// make a change to the current project it updates inside of the data structure 
+// and then updates in local stoage 
+// so change current task then replace CT new info into CP and then update structrre
+
+// so like 4 things need to update and i think i can make this update function into one
+// thing so that way i dont have to go threw this shit every single time. 
+
+  taskINCurrentProject = data.currentProject.tasks.find((task =>{
+        return task.id = taskID
+   }))
+   
+   taskINCurrentProject.progress = data.currentTask.progress
+
+   taskInData.progress = taskINCurrentProject.progress
+
+   updateStorage()
+
+// save to local storage so it can be read for other functions once it leaves current Task. 
+// prob read storage by ID and then make that item it storage equal to the current Task 
+// re write the task view so it updates on click
+}
 
 function getTaskValues() {
     name = tasksNameInput.value
@@ -483,7 +555,7 @@ function selectTask(e) {
         selectedTaskID = e.target.id
        
 
-       selectedTask = data.currentProject.tasks.find(task =>{
+       selectedTask = data.projects.tasks.find(task =>{
             return task.id === selectedTaskID
         })
         data.currentTask = selectedTask
@@ -528,6 +600,7 @@ function storeCurrentProject() {
     localStorage.setItem('currentProject', project)
 }
 
+
 function getCurrentProjectFromStorage() {
     project = localStorage.getItem('currentProject')
     project = JSON.parse(project)
@@ -567,6 +640,12 @@ function storeProject(newProject) {
     }
 }
 
+function updateStorage(){
+localStorage.setItem('projectStorage',JSON.stringify(data.projects))
+}
+
+
+
 
 function showToast(x, y) {
     console.log(x, y)
@@ -597,8 +676,8 @@ function showTask(task) {
     /// Convert Due Date Time info to local String 
     component = `<ul class="collection">
     <li class="collection-child">This is a <span class = ${color}>${task.diffuculty}</span> task! </li>
-    <li class="collection-child">${task.pomodoros.totalTime} Total Time</li>
-    <li class="collection-child">${task.progress}% Done</li>
+    <li class="collection-child">${task.pomodoros.totalTime} mins worked</li>
+    <li class="collection-child">Kanban Zone: ${task.progress}</li>
     <li class="collection-child">${task.priority} priority </li>
     <li class="collection-child">Created on ${task.timeStamp.date}  </li>
     <li class="collection-child">Due on ${task.dueDate} </li>
@@ -692,9 +771,9 @@ function kanban(){
     
 
 
-    projects = data.projects
+    projectStorage = getProjectStorage()
 
-    data.projects.forEach((project)=>{
+    projectStorage.forEach((project)=>{
         // FOR EACH PROJECT
         // GO INTO FOLDER AND SEARCH ALL TASK
         // TASKS ARE THEN SORTED BASED ON PROGRESS
@@ -702,19 +781,19 @@ function kanban(){
     
         project.tasks.forEach((task)=>{
             switch (task.progress){
-                case 1:
+                case 'Test Backlog':
                 a.push(task)
                 break;
 
-                case 2:
+                case 'Buffer Zone':
                 b.push(task)
                 break;
 
-                case 3:
+                case 'In Progress':
                 c.push(task)
                 break;
 
-                case 4:
+                case 'Done':
                 d.push(task)
                 break;
             }
@@ -724,7 +803,7 @@ function kanban(){
 
     })
 
-    console.log(a)
+    console.log(a,b,c,d)
 }
 
 init()
