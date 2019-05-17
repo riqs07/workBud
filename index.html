@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://use.typekit.net/xbq5tvy.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<nav class="nav">
+    <h2 class="nav__header">WorkBuddy</h2>
+</nav>
+
+<div id="anchor"></div>
+
+   <div class="container">
+        <div class="card">
+            <div class="card-title" id = "pomodoro-timer">Pomodoro Timer</div>
+                <input type="text" name="" class="pomodoro__name-input input-text"  placeholder="Pomodoro Name">
+                <div class="pomodoro__timer"></div>
+                <button class="btn green" id = "pomodoro-start">Start</button>
+                <button class="btn red" id = "pomodoro-pause">Pause</button>
+                <button class="btn blue" id = "pomodoro-reset">Reset</button>
+
+                <select name="pomodoroLengthSelect" id="pomodoroLengthSelect">
+                <option value="4">Test</option>
+                <option value="600">10:00</option>
+                <option value="900">15:00</option>
+                <option value="1200">20:00</option>
+                <option value="1500">25:00</option>
+            </select>
+
+                <select name="pomodoroBreakLengthSelect" id="pomodoroBreakLengthSelect">
+                <option value="4">Test</option>
+                <option value="300">5:00</option>
+                <option value="600">10:00</option>
+                <option value="900">15:00</option>
+                <option value="1200">20:00</option>
+            </select>
+<hr>
+
+            <div class="btn2">Start</div>
+            <div class="btn4">Pause</div>
+            <div class="btn4"><i class="fas fa-undo"></i>
+
+            </div>
+          <div class="grid">
+              <div class="grid1">
+                    <select name="select1" id="" class="select1">
+                            <option value="">Focus</option>
+                            <option value="">Topaz Lotion</option>
+                            <option value="">Topaz Lotion<</option>
+                        </select>
+                        <select name="" id="" class="select1">
+                                <option value="">Breaks</option>
+                                <option value="">Topaz Lotion</option>
+                                <option value="">Topaz Lotion</option>
+                        </select>
+              </div>
+              <div class="grid2">
+<div class="timer2">
+    25:00
+</div>              </div>
+          </div>
+            </div>
+            <div class="card">
+                    <div class="card-title">Projects</div>
+                    <div class="projects__selected-task--title"></div>
+                    <div class="projects__selected-task--info"></div>
+                    <ul class="projects__project-list collection">
+                       
+                    </ul>
+
+                    <input type="text" name="" id="" class="projects__name-input input-text" placeholder ="Enter Project Name">
+                    <input type="date" class="projects__date-picker input-date">
+
+                    <button class="btn green" id = "projects__add">New Project</button>
+                    <button class="btn green" id = "projects__add">New Project</button>
+                </div>
+
+
+
+
+            <div class="card">
+                    <div class="card-title" id = "projectName"></div>
+                        <input type="text" name="" class="tasks__search-input input-text" placeholder="Search Tasks">
+                        <select name="taskListFilter" class="tasks__task-list--filter input-select">
+                                <option value="1">Priority</option>
+                                <option value="2">Diffuculty</option>
+                                <option value="3">Date</option>
+                            </select>
+
+                        <select name="taskListProjectAssign" class="tasks__task-list--assign">
+                            </select>
+
+
+                            <button class="btn red">Kanban Board</button>
+                            <button class="btn red">Start Project Timer</button>
+                            <button class="btn red">Task View</button>
+
+
+                      <div id="tasks-view">View</div>
+                       <div class="tasks__selected-task--panel" >
+                        <div class="tasks__selected-task--title"></div>
+                        <div class="tasks__selected-task--info"></div>
+                        <div class="tasks__edit-state--buttons">
+                                <button class="btn green" id = "tasks__edit">Edit</button>
+                                <button class="btn red" id = "tasks__delete">Delete</button>
+                                <button class="btn blue" id = "tasks__assign">Assign</button>
+                                <button class="btn red" id = "tasks__comment">Comment</button>
+                                <button class="btn red" id = "tasks__pomodoroBtn">Pomodoro</button>
+                                <button class="btn red" id = "tasks__complete">Complete</button>
+                                <button class="btn red" id = "tasks__back">Back</button>
+                        </div>
+                       </div>
+                        
+                      
+
+                        <ul class="tasks__task-list collection">
+                           
+                        </ul>
+                       
+                        
+
+                      
+                    </div>
+
+
+            <div class="card">
+                    <div class="card-title">Tasks</div>
+                        <input type="text" name="" class="tasks__name-input input-text" placeholder="Enter Tasks">
+                        
+                        <select name="prioritySelect" class="tasks__select-priority input-select select1">
+                            <option value="Immidiate">1</option>
+                            <option value="Soon">2</option>
+                            <option value="Eventually">3</option>
+                        </select>
+
+                        <select name="difficultySelect" class="tasks__difficulty-priority input-select select1">
+                            <option value="easy">Easy</option>
+                            <option value="medium">Medium</option>
+                            <option value="hard">Hard</option>
+                        </select>
+
+                        <input type="date" class="tasks__date-picker input-date select1">
+                        <button class="btn2 wide" id = "tasks__add">Add</button>
+                        
+                    </div>
+
+                    
+           
+                    
+                
+
+                    <div class="kanban">
+                        <div class="grid">
+                            <div class="kanban__todo">
+                                    <div class="kanban-title">To-do</div>
+                                    <i class="fas fa-plus"></i>
+                                <ul class="collection">
+                                    <li class="collection-child " draggable="true">Hello</li>
+                                    <li class="collection-child">Hello</li>
+                                    <li class="collection-child">Hello</li>
+                                </ul>
+                            </div>
+
+                            <div class="kanban__today">
+                                    <div class="kanban-title">Due Todat</div>
+
+                                <ul class="collection">
+                                    <li class="collection-child">Hello</li>
+                                    <li class="collection-child">Hello</li>
+                                    <li class="collection-child">Hello</li>
+                                </ul>
+                            </div>
+                            <div class="kanban__progress">
+                                <div class="kanban-title">In Progress</div>
+                                <ul class="collection">
+                                    <li class="collection-child">Hello</li>
+                                    <li class="collection-child">Hello</li>
+                                    <li class="collection-child">Hello</li>
+                                    
+                                </ul>
+                            </div>
+                            <div class="kanban__done">
+                                    <div class="kanban-title">Done</div>
+                                <ul class="collection">
+                                    <li class="collection-child">Hello</li>
+                                    <li class="collection-child">Hello</li>
+                                    <li class="collection-child">Hello</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="toast">Toast</div>
+   </div>
+
+   <script src="js/pomodoro.js"></script>
+   <script src="js/view.js"></script>
+   <script src="js/tasks.js"></script>
+</body>
+</html>
