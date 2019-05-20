@@ -1,0 +1,50 @@
+@import "abstracts/palette";
+@import "abstracts/mixins";
+@import "abstracts/animations";
+@import "abstracts/shadows";
+
+@import "components/button";
+@import "components/card";
+@import "components/inputs";
+
+@import "layout/pomodoro";
+@import "layout/tasks";
+@import "layout/misc";
+
+@import "base/base";
+
+
+
+
+.grid{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    grid-gap: 10px;
+}
+
+.kanban{
+
+    &__todo{
+        grid-column: 1/2;
+        background-color: red;
+    }
+
+    &__today{
+        grid-column: 2/3;
+        background-color: blue;
+
+    }
+
+    &__progress{
+        grid-column: 3/4;
+        background-color: green;
+
+    }
+
+    &__done{
+        grid-column: 4/5;
+        background-color: purple;
+
+    }
+}
+
