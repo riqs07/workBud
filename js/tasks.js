@@ -671,18 +671,28 @@ function showToast(text,y) {
 
 
     // add a fade in animation 
-    toast = document.createElement('div')
-    toast.classList.add(`${color}`,'toast')
-    toast.innerHTML = text
+
+    toastContainer = document.createElement('div')
+    toastText = document.createTextNode(text)
+    toastActionBtn = document.createElement('a')
+
+    toastActionBtn.innerHTML = 'Undo'
+
+    toastContainer.classList.add('toastContainer')
+    toastActionBtn.classList.add('toastActionBtn')
+
+
+    toastContainer.appendChild(toastText)
+    toastContainer.appendChild(toastActionBtn)
 
     setTimeout(()=>{
         // add a fade out amimation 
-        toast.style.display = "none"
+        toastContainer.style.display = "none"
         console.log('goo')
         // 
     },5000)
 
-    document.querySelector('.toast-anchor').appendChild(toast)
+    document.querySelector('.toast-anchor').appendChild(toastContainer)
 }
 
 function showTask(task) {

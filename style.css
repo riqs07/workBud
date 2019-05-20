@@ -222,11 +222,25 @@ body {
   .toast-anchor{
     position: relative;
   }
-  .toast{
+
+
+  .toastContainer{
    
+    background-color: #323232;
     position: absolute;
-    top:50%;
     border-radius: 5px;
     padding:15px;
     margin: 15px;
+  }
+  
+  .toastActionBtn{
+    color: red;
+    text-transform: uppercase;
+    margin-left: 20px;
+    padding: 5px;
+  }
+
+
+  .toastActionBtn:hover{
+    background-color: #e57171
   }
