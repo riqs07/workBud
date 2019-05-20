@@ -78,7 +78,6 @@
                     <input type="date" class="projects__date-picker input-date">
 
                     <button class="btn green" id = "projects__add">New Project</button>
-                    <button class="btn green" id = "projects__add">New Project</button>
                 </div>
 
 
@@ -97,7 +96,7 @@
                             </select>
 
 
-                            <button class="btn red">Kanban Board</button>
+                            <button class="btn red" id = "createKanbanBtn">Kanban Board</button>
                             <button class="btn red">Start Project Timer</button>
                             <button class="btn red">Task View</button>
 
@@ -158,47 +157,40 @@
 
                     <div class="kanban">
                         <div class="grid">
-                            <div class="kanban__todo">
+                            <div class="kanban__zone--todo">
                                     <div class="kanban-title">To-do</div>
                                     <i class="fas fa-plus"></i>
-                                <ul class="collection">
-                                    <li class="collection-child " draggable="true">Hello</li>
-                                    <li class="collection-child">Hello</li>
-                                    <li class="collection-child">Hello</li>
+                                <ul class="collection kanban__todo-collection">
+                                   
                                 </ul>
                             </div>
 
-                            <div class="kanban__today">
+                            <div class="kanban__zone--buffer">
                                     <div class="kanban-title">Due Todat</div>
 
-                                <ul class="collection">
-                                    <li class="collection-child">Hello</li>
-                                    <li class="collection-child">Hello</li>
-                                    <li class="collection-child">Hello</li>
+                                <ul class="collection kanban__buffer-collection">
+                                  
                                 </ul>
                             </div>
-                            <div class="kanban__progress">
+                            <div class="kanban__zone--progress">
                                 <div class="kanban-title">In Progress</div>
-                                <ul class="collection">
-                                    <li class="collection-child">Hello</li>
-                                    <li class="collection-child">Hello</li>
-                                    <li class="collection-child">Hello</li>
+                                <ul class="collection kanban__progress-collection">
+                                   
                                     
                                 </ul>
                             </div>
-                            <div class="kanban__done">
+                            <div class="kanban__zone--done">
                                     <div class="kanban-title">Done</div>
-                                <ul class="collection">
-                                    <li class="collection-child">Hello</li>
-                                    <li class="collection-child">Hello</li>
-                                    <li class="collection-child">Hello</li>
+                                <ul class="collection kanban__done-collection">
+                                   
                                 </ul>
                             </div>
                         </div>
                     </div>
 
-                    <div class="toast">Toast</div>
    </div>
+
+   <div class="toast-anchor"></div>
 
    <script src="js/pomodoro.js"></script>
    <script src="js/view.js"></script>

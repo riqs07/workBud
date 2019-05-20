@@ -23,7 +23,7 @@ class Task {
             totalPomodoros: 0,
         }
         this.isCompleted = false;
-        this.progress = 0;
+        this.progress = 'Task Backlog';
         this.comments = []
     }
 }
@@ -88,6 +88,9 @@ function getSelectors(){
     taskCompleteBtn = document.querySelector('#tasks__complete')
     taskBackBtn = document.querySelector('#tasks__back')
     taskProgressBtn = document.querySelector('#tasks__progress')
+
+    document.querySelector('#createKanbanBtn').addEventListener('click',createKanbanBoard)
+    
     
     taskEditBtn.addEventListener('click', editThisTask)
     taskDeleteBtn.addEventListener('click', deleteThisTask)
@@ -302,7 +305,7 @@ function changeTaskProgress(){
     d = document.createElement('option')
 
     a.innerHTML = 'Task Backlog'
-    b.innerHTML = 'Buffer Zone '
+    b.innerHTML = 'Buffer Zone'
     c.innerHTML = 'In Progress'
     d.innerHTML = 'Done'
 
@@ -354,7 +357,7 @@ function submitChangeTaskProgress(){
    taskINCurrentProject.progress = data.currentTask.progress
 
    taskInData.progress = taskINCurrentProject.progress
-
+   showToast('Progress Updated','success')
    updateStorage()
 
 // save to local storage so it can be read for other functions once it leaves current Task. 
@@ -385,7 +388,7 @@ function getProjectValues() {
 function addTasks() {
 
     if (tasksNameInput.value === "") {
-        showToast('Please Enter a Value', 'error')
+        showToast('Please Enter a Value', 'warning')
     } else {
 
 
@@ -430,7 +433,7 @@ function addProjects() {
 
 
     projectsNameInput.value = ''
-    showToast('Project Added')
+    showToast('Project Added','success')
 
 }
 
@@ -554,11 +557,11 @@ function selectTask(e) {
     if (e.target.classList.contains("tasks__task-list--child")) {
         selectedTaskID = e.target.id
        
-
-       selectedTask = data.projects.tasks.find(task =>{
+    
+       selectedTaskInData = data.currentProject.tasks.find(task =>{
             return task.id === selectedTaskID
         })
-        data.currentTask = selectedTask
+        data.currentTask = selectedTaskInData
         showTask(data.currentTask)
     }
 }
@@ -641,14 +644,45 @@ function storeProject(newProject) {
 }
 
 function updateStorage(){
-localStorage.setItem('projectStorage',JSON.stringify(data.projects))
+
+
+
+    localStorage.setItem('projectStorage',JSON.stringify(data.projects))
+
+
 }
 
 
 
 
-function showToast(x, y) {
-    console.log(x, y)
+function showToast(text,y) {
+
+    let color
+
+    switch (y){
+        case 'success':
+        color = 'blue'
+        break;
+
+        case 'warning':
+        color = 'red';
+        break;
+    }
+
+
+    // add a fade in animation 
+    toast = document.createElement('div')
+    toast.classList.add(`${color}`,'toast')
+    toast.innerHTML = text
+
+    setTimeout(()=>{
+        // add a fade out amimation 
+        toast.style.display = "none"
+        console.log('goo')
+        // 
+    },5000)
+
+    document.querySelector('.toast-anchor').appendChild(toast)
 }
 
 function showTask(task) {
@@ -763,7 +797,9 @@ function init() {
     printProjectStorage()
 }
 
-function kanban(){
+function createKanbanBoard(){
+
+
     let a = []
     let b = []
     let c = []
@@ -771,39 +807,80 @@ function kanban(){
     
 
 
+
     projectStorage = getProjectStorage()
 
-    projectStorage.forEach((project)=>{
+    data.currentProject.tasks.forEach((task)=>{
         // FOR EACH PROJECT
         // GO INTO FOLDER AND SEARCH ALL TASK
         // TASKS ARE THEN SORTED BASED ON PROGRESS
         // USE SWITCH WITH FOR EACH INSTEAD OF FIND
     
-        project.tasks.forEach((task)=>{
-            switch (task.progress){
-                case 'Test Backlog':
-                a.push(task)
-                break;
+        switch (task.progress){
+            case 'Task Backlog':
+            a.push(task)
+            break;
 
-                case 'Buffer Zone':
-                b.push(task)
-                break;
+            case 'Buffer Zone':
+            b.push(task)
+            break;
 
-                case 'In Progress':
-                c.push(task)
-                break;
+            case 'In Progress':
+            c.push(task)
+            break;
 
-                case 'Done':
-                d.push(task)
-                break;
-            }
+            case 'Done':
+            d.push(task)
+            break;
+        }
+        // project.forEach((task)=>{
+        //     switch (task.progress){
+        //         case 'Task Backlog':
+        //         a.push(task)
+        //         break;
+
+        //         case 'Buffer Zone':
+        //         b.push(task)
+        //         break;
+
+        //         case 'In Progress':
+        //         c.push(task)
+        //         break;
+
+        //         case 'Done':
+        //         d.push(task)
+        //         break;
+        //     }
 
             
-        })
+        // })
+
+
 
     })
+
+
+    todo = document.querySelector('.kanban__todo-collection')
+    buffer = document.querySelector('.kanban__buffer-collection')
+    progress = document.querySelector('.kanban__progress-collection')
+    done = document.querySelector('.kanban__done-collection')
+
+ 
+    placeTasksintoKanban(a,todo)
+    placeTasksintoKanban(b,buffer)
+    placeTasksintoKanban(c,progress)
+    placeTasksintoKanban(d,done)
+    
 
     console.log(a,b,c,d)
 }
 
+
+function placeTasksintoKanban(array,column){
+    array.forEach((task)=>{
+        li = createListItem()
+        li.innerHTML = task.name
+        column.appendChild(li)
+    })
+}
 init()
