@@ -1,0 +1,33 @@
+.input{
+    
+    &-text{
+
+  
+        border-radius: 5px ;
+        width: 100%;
+        border: 2px solid grey;
+        font-size: 1.25em;
+    
+        transition: all .3s;
+    
+        &:focus{
+            border: 2px solid $blue;
+            box-shadow: $shadow-p2-1;
+            box-shadow: $shadow-p2-2;
+        }
+
+        &:hover{
+            border: 2px solid $blue;
+        }
+    }
+
+    &-select{
+        
+        font-size: 1.25em;
+    }
+
+    &-date{
+        font-size: 1.25em;
+    }
+   
+}

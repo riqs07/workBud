@@ -1,0 +1,17 @@
+.pomodoro{
+    position: relative;
+
+
+    &__name-input{
+        @include centerX;
+        border-radius: 3px;
+        
+    }
+
+    &__timer{
+        @include centerX;
+        font-size: 3rem;
+
+    }
+}
+
