@@ -1,0 +1,113 @@
+Will have pomdoro timer 
+can name pomdoros and assign pomdoros to diffrents tasks
+
+
+also have a to do list 
+
+ideallly can track time spent on certain parts of projects 
+
+
+fix start button so it dosent reset you every time
+
+
+
+
+
+tasks can be assigned to projects or single 
+
+
+Project object containes tasks
+
+taks contain name priortty diffuculty due-date date-created
+
+
+
+UPdate 1 4-10 /////////
+so i mean technically its working but like for whatever reason
+the all the projects in the data are getting over ridden and its adding the tasks on 
+instead of changing but the select project function is working want to get it so you 
+select and see the tasks as well as display the rest of the inforamtion i have on file 
+
+also need to figure out ID cause right now its fucked up and i think that may be part 
+of the reaseaon why its wokring because everything is working off ID checking
+and the createID() i have was a bandaid solution. Need to think how i want to do it though
+because tasks might need to have unique ids in their own project folder and then 
+get a new on if they move into a diffren project folder.Need to make IDs unique
+
+
+also for some reason tasks are not staying in therre project folder.
+need to only have things added to unassinged if no select option was selected or 
+perhaps i might have a unassinged select option so it can go in their that way 
+i can make it buzz if nothing is selected rather than having an error check 
+
+once i get all that working it should be a breeze as on click will show you 
+info on the project you clicked on and if you clcik on a task you get more specific info
+
+also option to start pomodoro on whole project of on a single task that will be tallied 
+on the task and project levels 
+
+so that prob means removing pomdoro from starting UI ;
+and also obvs tidying up the UI but rn its in working condition and it dosent look 
+hidous so i can work with it untul i have it running
+
+finally need to fix the fact that the init dosent run if there is nothing in task storage
+always need to have current projects and tasks equal task storage. also need to make 
+projects add to select on add and not on reload; prob just have a function make that 
+select equal to data.projects on add 
+
+add feature were people can be assingged diffrent tasks or take part in a task but only 
+have like admin be able to assign people and complete projects but thats a strectch goal eople and complete projects but thats a strectch goal 
+
+
+5/12
+
+been quite a while need to find a way to complete task and have in save in storage
+that way the green blue underline will work if its complete or not
+
+5-16
+
+Get pomodoro working and time tracking for tasks / projects
+get kanban board going im thinking i can sort by the in progress thing but even so that is really implemented yet 
+but yeah i can prob do something like if its x then put in this column prob like a for each with a case statement 
+depending on the in progress 
+
+while im at it i should be able to make a due soon view based on the due date 
+lots of diffrent views based on a lot of diffren things like the priority level 
+
+kanban thing has been started created a funciton that searches every task in every project and 
+prints out based on progressright now all things have a progress level of zero si  i nceed to 
+find a way to change that in the UI. Also I guess i can leve it how it is so it can kinda search all taska and maybe create a huge kanban boardbut i waant it to be specific to the current project you are wokring on idk 
+i kind of need to decide what iw ant this to be bnecaus eat first it was a todo app but now its kind of 
+a project management app and i think straddling the tow is confusing but for not i hacve the kanban up 
+necuase i l;ike it and its eems like i shoule be able to iomplemtn
+all i need is another funcitron  which prints out the kanbadn arrays into the board i have up 
+tbnuh it shouldne be that hard i wasn treally putting in my best effort 
+beacue i wsa kind of mad tired but that is off topic . Its coming along 
+
+//
+5-21 
+main issues are stuff isnt updating in UI automatically as well as 
+there is a issue in saving things in storage where it dosent always work 
+and i dont think it is a the local storage level.
+
+ i think the culprit is the findInData function becuase when it returns a fodler to mutate it is giving me 
+ the folder in the projects part of the data structure not the current project or in local storage
+ more investigation needed but now that i can pinpoint the issue i should be able to solve it 
+
+basically clean up how data is added to storage both in project and in data storage
+essentiaslly when something is updated in the current project/task make it equal to the same thing in the data structure 
+and whenever the data structure is updated make it save to the local storage
+
+
+def make that all one function so i dont have to keep repeating myself 
+
+also prob going to make a fucntion that makes a user input UI so id ont have to do document create everytime
+
+also going to need a function which get the current project and task ID's ive typed that out so much 
+add users need to be saved but i have a rough outline for those functions even though buttons arnt linked in UI
+as far as all the UI updates go need to make it so its only one at a time
+
+
+got user add to project and task working need to hook up buttons on UI as well as add styling 
+
+gonna try to work on adding users to a project and a task
