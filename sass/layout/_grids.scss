@@ -1,0 +1,51 @@
+
+.grid{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    grid-gap: 5px;
+}
+
+.kanban{
+
+    &__zone{
+
+        &--todo{
+            grid-column: 1/2;
+            background-color: red;
+        }
+        &--buffer{
+            grid-column: 2/3;
+            background-color: blue;
+        }
+        &--progress{
+            grid-column: 3/4;
+            background-color: green;
+        }
+        &--done{
+            grid-column: 4/5;
+            background-color: purple;
+        }
+    }
+    
+}
+
+.flex{
+    display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+
+
+}
+.habit-box{
+    border:solid 2px black;
+    margin:5px;
+    padding:10px;
+    
+    &:hover{
+        background-color: green
+    }
+
+   
+}
+
+

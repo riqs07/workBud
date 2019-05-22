@@ -213,21 +213,10 @@
     .collection-child:last-child {
       border-bottom: 1px solid black; }
 
-* {
-  margin: 0px;
-  padding: 0px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-
-body {
-  background-color: #b9c6d0; }
-
-.container {
-  margin: 0 20%; }
-
 .grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-gap: 10px; }
+  grid-gap: 5px; }
 
 .kanban__zone--todo {
   grid-column: 1/2;
@@ -244,3 +233,26 @@ body {
 .kanban__zone--done {
   grid-column: 4/5;
   background-color: purple; }
+
+.flex {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap; }
+
+.habit-box {
+  border: solid 2px black;
+  margin: 5px;
+  padding: 10px; }
+  .habit-box:hover {
+    background-color: green; }
+
+* {
+  margin: 0px;
+  padding: 0px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+
+body {
+  background-color: #b9c6d0; }
+
+.container {
+  margin: 0 20%; }

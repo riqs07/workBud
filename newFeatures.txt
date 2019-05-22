@@ -1,0 +1,17 @@
+For habit tracker
+
+Form to add new habit button,
+ set priority 
+ and set goal for days in a row
+
+see daily-weekly-monthly score in a graph 
+
+For Life Tracker / Journel
+
+Basically ask a numeric survey for user to input to @ end of day or whenever
+and take that data and create a graph..... also the jornel idea
+
+
+
+
+https://medium.com/datafloq/habit-tracking-app-javascript-mongodb-e460912a96d5

@@ -52,6 +52,29 @@ class Project {
     }
 }
 
+
+class Habit {
+    constructor(name, priority){
+        let d = new Date();
+        
+        this.name = name;
+        this.id = createUniqueID();
+        this.priority = priority;
+        this.daysInARow = 0;
+
+
+        this.timeStamp = {
+            date: d.toLocaleDateString(),
+            time: d.toLocaleTimeString(),
+            day: d.getDay(),
+            month: d.getMonth()
+        }
+    }
+}
+
+
+
+
 data = {
     unAssignedTasks: [],
     projects: [],
