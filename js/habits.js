@@ -27,7 +27,7 @@ function updateScore(){
 
 function showHabits(){
     sample.habits.forEach(habit =>{
-        
+
     })
 }
 sample = {
@@ -35,4 +35,24 @@ sample = {
     weekScore:null,
     monthScore:null,
 
+}
+
+
+radioCards = document.getElementsByClassName('radio-card')
+goo = document.querySelector('.radio-card-container')
+goo.addEventListener('click',foo)
+
+function foo(e){
+    console.log(e.target)
+    if (e.target.classList.contains('radio-card')){
+
+        if(radioCards.classList.contains('selected')){
+            radioCards.classList.remove('selected')
+            console.log('goo')
+        }
+
+
+        e.target.classList.add('selected')
+
+    }
 }

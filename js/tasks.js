@@ -1,5 +1,4 @@
 function addTasks() {
-    console.log('hell')
 
     if (tasksNameInput.value === "") {
         showToast('Please Enter a Value', 'warning')
@@ -20,7 +19,6 @@ function addTasks() {
 
 
         projectInData = findProjectInData(userAssignedProjectID)
-        console.log(projectInData, userAssignedProjectID)
 
         projectInData.tasks.push(task)
         storeTaskInProject(task, projectInData.id)
@@ -56,25 +54,19 @@ function editThisTask() {
 
 function deleteThisTask() {
   
-    taskID = data.currentTask.id
-    projectID = data.currentProject.id
+    taskID = getCurrentTaskID()
 
-    projectFolder = findProjectInData(projectID)
+   index = data.currentProject.tasks.findIndex(task => {
+       return task.id === taskID
+   })
 
-    taskToDelete = findTaskInProjectFolder(taskID,projectFolder)
+   data.currentProject.tasks.splice(index,1)
 
-    index = projectFolder.tasks.indexOf(taskToDelete)
+   updateData()
 
-    projectFolder.tasks.splice(index,1)
-   
-
-    
-    data.currentTask = null
-    // Delete in local storage()
-    // Reset To not edit state reset()
 }
 
-function assignThisTask() {
+function migrateThisTask() {
 
     destinationFolderID = document.querySelector('.tasks__task-list--assign').value
     destinationProjectFolder = findProjectInData(destinationFolderID)
@@ -85,17 +77,14 @@ function assignThisTask() {
 
     deleteThisTask()
     showToast('Task Assigned','success')
+
  }
 
 function addUsersToProjectClick(){
-       // works but sample projects dont have updated structure
-    // obvs have UI pop and show an input or maybe a select of options
-    // 
-    
-    /// Show add option in UI
-    addUsersToProjectUI()
-    showToast('User added to Project','success')
-
+    //okay if this function just calls another function 
+    // then just have click event attached to that one
+    // will leave it here for now 
+     addUsersToProjectUI()
 }
 
 
@@ -111,6 +100,8 @@ function addUsersToProjectUI(){
 
     sumbit.addEventListener('click',addUserToProjectInData)
 
+    /// think error is occuring here as tasks panel isnt a thing until
+    // a task is selected fix later 
     taskInfoPanel = document.querySelector('.tasks__selected-task--info')
 
     parent = taskInfoPanel.parentNode
@@ -119,72 +110,58 @@ function addUsersToProjectUI(){
     parent.insertBefore(sumbit,taskInfoPanel)
 }
 
-function addUserToProjectInData(projectFolder){
+function addUserToProjectInData(){
 
-    id = data.currentProject.id
+    newUser =  document.querySelector('#addUserTextBox').value
 
-   projectFolder = findProjectInData(id)
-   
-   newUser =  document.querySelector('#addUserTextBox').value
-
-    projectFolder.users.push(newUser)
-
-    console.log(projectFolder)
-}
+    if (newUser != ""){
+        data.currentProject.users.push(newUser)
+        updateData()
+        showToast('User Added to project','success')
+    } else {
+        showToast('Please Enter a value','warning')
+    }
+    }
+  
 
 function addUsersToTasksClick(){
-    projectID = data.currentProject.id
-    taskID = data.currentTask.id
-
-    taskToMutate = findTaskInProjectFolder(taskID,projectID)
+  
     addUserToTasksUI()
-    showToast('User added to Task','success')
 
 }
 
 function addUserToTasksUI(){
 
-    
+  if (data.currentProject.users.length == 0){
+      showToast('Please Add Users to the Project','warning')
+  } else {
+
     select = document.createElement('select')
     select.id = 'userList'
     sumbit = document.createElement('button')
     sumbit.innerHTML = 'Submit'
     sumbit.addEventListener('click',addUserToTaskInData)
 
-    taskID = data.currentTask.id
-    projectID = data.currentProject.id
-
-    projectFolder = findProjectInData(projectID)
-    task = findTaskInProjectFolder(taskID,projectID)
 
     taskInfoPanel = document.querySelector('.tasks__selected-task--info')
 
-  
-
-   
-
-
     parent = taskInfoPanel.parentNode
 
-    parent.insertBefore(select,taskInfoPanel)
-    parent.insertBefore(sumbit,taskInfoPanel)
 
-    projectFolder.users.forEach((user)=>{
+
+    data.currentProject.users.forEach((user)=>{
         document.querySelector('#userList').innerHTML +=
         `<option value="${user}">${user}</option`
     })
+  }
 }
 
 function addUserToTaskInData(){
-    taskID = data.currentTask.id
-    projectID = data.currentProject.id
+  
 
-    projectFolder = findProjectInData(projectID)
-    task = findTaskInProjectFolder(taskID,projectID)
-
-   x = document.querySelector('#userList').value
-
-    console.log(x)
+    newUser = document.querySelector('#userList').value
+   data.currentTask.users.push(newUser)
+   showToast('User assigned to Task','success')
 
   
 
@@ -194,21 +171,7 @@ function addUserToTaskInData(){
 function commentThisTask() {  
 
     text = document.querySelector('#new-textbox').value
-   
     data.currentTask.comments.push(text)
-
-    taskID = data.currentTask.id
-    projectID = data.currentProject.id
-
-    projectFolder = findProjectInData(projectID)
-
-    taskToMutate = findTaskInProjectFolder(taskID,projectFolder)
-
-    index = projectFolder.tasks.indexOf(taskToMutate)
-
-    projectFolder.tasks[index] = data.currentTask
-
-    // add a delay 
 
     document.querySelector('#new-textbox').remove()
     document.querySelector('#submit-comment').remove()
@@ -216,7 +179,7 @@ function commentThisTask() {
     //save to local Storage
     showToast('Comment Added','success')
 
-
+    updateData()
 }
 
 
@@ -228,7 +191,7 @@ function createInputsForComment(){
 
     sumbit.innerHTML = 'Submit'
     sumbit.id = 'submit-comment'
-    sumbit.classList = 'btn green'
+    sumbit.classList = 'button button-1'
 
     sumbit.addEventListener('click',commentThisTask)
 
@@ -296,7 +259,7 @@ function changeTaskProgress(){
 
     sumbit.innerHTML = 'Submit'
     sumbit.id = 'submit-progress'
-    sumbit.classList = 'btn green'
+    sumbit.classList = 'button button-1'
 
     sumbit.addEventListener('click',submitChangeTaskProgress)
 
@@ -310,39 +273,13 @@ function changeTaskProgress(){
 
 function submitChangeTaskProgress(){
    newProgress = document.querySelector('#progress-select').value
-
-    taskID = data.currentTask.id
-    projectID = data.currentProject.id
-
-    
-
-    // taskInCP.progress = newProgress
    data.currentTask.progress = newProgress
-   taskInData = findTaskInProjectFolder(taskID,projectID)
 
-// make a change to the current project it updates inside of the data structure 
-// and then updates in local stoage 
-// so change current task then replace CT new info into CP and then update structrre
-
-// so like 4 things need to update and i think i can make this update function into one
-// thing so that way i dont have to go threw this shit every single time. 
-
-  taskINCurrentProject = data.currentProject.tasks.find((task =>{
-        return task.id = taskID
-   }))
-   
-   taskINCurrentProject.progress = data.currentTask.progress
-
-   taskInData.progress = taskINCurrentProject.progress
+   updateData()
    showToast('Progress Updated','success')
-   updateStorage()
 
-// save to local storage so it can be read for other functions once it leaves current Task. 
-// prob read storage by ID and then make that item it storage equal to the current Task 
-// re write the task view so it updates on click
+
 }
-
-
 
 
 

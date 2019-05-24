@@ -12,9 +12,10 @@ function getSelectors(){
     projectsList = document.querySelector('.projects__project-list')
     projectsAddBtn = document.querySelector('#projects__add')
     projectsDatePicker = document.querySelector('.projects__date-picker')
+    projectsAssignBtn = document.querySelector('#projectAssignBtn')
     
     
-    
+    projectsAssignBtn.addEventListener('click',addUsersToProjectClick)
     
     document.querySelector('.tasks__edit-state--buttons').style.display = "none"
     
@@ -32,7 +33,8 @@ function getSelectors(){
     
     taskEditBtn.addEventListener('click', editThisTask)
     taskDeleteBtn.addEventListener('click', deleteThisTask)
-    taskAssignBtn.addEventListener('click', assignThisTask)
+    // taskMigrateBtn.addEventListener('click', migrateThisTask)
+    taskAssignBtn.addEventListener('click', addUsersToTasksClick)
     taskCommentBtn.addEventListener('click', createInputsForComment)
     // taskPomodoroBtn.addEventListener('click',showPomodoroUI)
     taskCompleteBtn.addEventListener('click', completeThisTask)

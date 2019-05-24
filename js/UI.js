@@ -54,16 +54,13 @@ function showToast(text,y) {
     toastText = document.createTextNode(text)
 
     toastText.color = "#eee"
-    toastActionBtn = document.createElement('a')
-
-    toastActionBtn.innerHTML = 'Undo'
+   
 
     toastContainer.classList.add('toast-container',`${color}`)
     toastActionBtn.classList.add('toast-action')
 
 
     toastContainer.appendChild(toastText)
-    toastContainer.appendChild(toastActionBtn)
 
     setTimeout(()=>{
         // add a fade out amimation 
@@ -194,7 +191,6 @@ function createKanbanBoard(){
         // GO INTO FOLDER AND SEARCH ALL TASK
         // TASKS ARE THEN SORTED BASED ON PROGRESS
         // USE SWITCH WITH FOR EACH INSTEAD OF FIND
-    
         switch (task.progress){
             case 'Task Backlog':
             a.push(task)
@@ -257,6 +253,7 @@ function createKanbanBoard(){
 
 function placeTasksintoKanban(array,column){
     array.forEach((task)=>{
+
         li = createListItem()
         li.innerHTML = task.name
         column.appendChild(li)

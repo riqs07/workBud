@@ -17,7 +17,7 @@
 <div id="anchor"></div>
 
    <div class="container">
-        <div class="card">
+        <!-- <div class="cards">
             <div class="card-title" id = "pomodoro-timer">Pomodoro Timer</div>
                 <input type="text" name="" class="pomodoro__name-input input-text"  placeholder="Pomodoro Name">
                 <div class="pomodoro__timer"></div>
@@ -65,7 +65,7 @@
     25:00
 </div>              </div>
           </div>
-            </div>
+            </div> -->
             <div class="card">
                     <div class="card-title">Projects</div>
                     <div class="projects__selected-task--title"></div>
@@ -77,7 +77,8 @@
                     <input type="text" name="" id="" class="projects__name-input input-text" placeholder ="Enter Project Name">
                     <input type="date" class="projects__date-picker input-date">
 
-                    <button class="btn green" id = "projects__add">New Project</button>
+                    <button class="button button-2" id = "projects__add">New Project</button>
+                    <button class="button button-2" >New Task</button>
                 </div>
 
 
@@ -96,9 +97,10 @@
                             </select>
 
 
-                            <button class="btn red" id = "createKanbanBtn">Kanban Board</button>
-                            <button class="btn red">Start Project Timer</button>
-                            <button class="btn red">Task View</button>
+                            <button class="button button-2" id = "createKanbanBtn">Kanban Board</button>
+                            <button class="button button-2">Start Project Timer</button>
+                            <button class="button button-2">Task View</button>
+                            <button class="button button-2" id = "projectAssignBtn">Assign Users</button>
 
 
                       <div id="tasks-view">View</div>
@@ -106,15 +108,17 @@
                         <div class="tasks__selected-task--title"></div>
                         <div class="tasks__selected-task--info"></div>
                         <div class="tasks__edit-state--buttons">
-                                <button class="btn green" id = "tasks__edit">Edit</button>
-                                <button class="btn red" id = "tasks__delete">Delete</button>
-                                <button class="btn blue" id = "tasks__assign">Assign</button>
-                                <button class="btn red" id = "tasks__comment">Comment</button>
-                                <button class="btn red" id = "tasks__pomodoroBtn">Pomodoro</button>
-                                <button class="btn red" id = "tasks__complete">Complete</button>
-                                <button class="btn red" id = "tasks__back">Back</button>
-                                <button class="btn red" id = "tasks__progress">Progress</button>
-                        </div>
+                                <button class="button button-2" id = "tasks__edit"><i class="fas fa-pencil-alt"></i> Edit</button>
+                                <button class="button button-2" id = "tasks__delete"><i class="far fa-trash-alt"></i> Delete</button>
+                                <button class="button button-2" id = "tasks__assign"><i class="fas fa-users"></i> Assign</button>
+                                <button class="button button-2" id = "tasks__comment"><i class="far fa-comments"></i> Comment</button>
+                                <button class="button button-2" id = "tasks__pomodoroBtn"><i class="far fa-clock"></i> Pomodoro</button>
+                                <button class="button button-2" id = "tasks__complete"><i class="fas fa-clipboard-check"></i> Complete</button>
+                                <button class="button button-2" id = "tasks__progress"><i class="fas fa-tachometer-alt"></i> Progress</button>
+                                <button class="button button-1" id = "tasks__back"><i class="fas fa-arrow-left"></i> Back</button>
+                                <button class="button button-2" id = "tasks__migrate">Migrate Task</button>
+
+                            </div>
                        </div>
                         
                       
@@ -189,36 +193,73 @@
                     </div>
 
    </div>
+
+
+
+<div class="flex radio-card-container">
+    <a class="radio-card">
+        <div class="main">Backlog</div>
+        <div class="num">1</div>
+    </a>
+    <a class="radio-card">
+        <div class="main">Buffer</div>
+        <div class="num">2</div>
+    
+    </a>
+    <a class="radio-card">
+        <div class="main">Progress</div>
+        <div class="num">3</div>
+    
+    </a>
+    <a class="radio-card">
+        <div class="main">Done</div>
+        <div class="num">4</div>
+    </a>
+</div>
+
+
+<input type="radio" name="" id="" class="">
+<input type="radio" name="" id="" class="foo radio-card">
+<input type="radio" name="" id="" class="foo">
+
+
+
+
+
+
+ <div class="habits-mod">
+       
 <button class="btn green">Add New</button>
-   <div class="flex">
-    <div class="habit-box"></div>
-    <div class="habit-box"></div>
-    <div class="habit-box"></div>
-    <div class="habit-box"></div>
-   </div>
+<div class="flex">
+ <div class="habit-box"></div>
+ <div class="habit-box"></div>
+ <div class="habit-box"></div>
+ <div class="habit-box"></div>
+</div>
 
-   <ul class="habit-ul">
-       <li class="habit-li">
-           Read
-           <div class="flex">
-            <div class="habit-box"></div>
-            <div class="habit-box"></div>
-            <div class="habit-box"></div>
-            <div class="habit-box"></div>
-           </div>
-       </li>
-       <li class="habit-li">
-           Read
-           <div class="flex">
-            <div class="habit-box"></div>
-            <div class="habit-box"></div>
-            <div class="habit-box"></div>
-            <div class="habit-box"></div>
-           </div>
-       </li>
-   </ul>
+<ul class="habit-ul">
+    <li class="habit-li">
+        Read
+        <div class="flex">
+         <div class="habit-box"></div>
+         <div class="habit-box"></div>
+         <div class="habit-box"></div>
+         <div class="habit-box"></div>
+        </div>
+    </li>
+    <li class="habit-li">
+        Read
+        <div class="flex">
+         <div class="habit-box"></div>
+         <div class="habit-box"></div>
+         <div class="habit-box"></div>
+         <div class="habit-box"></div>
+        </div>
+    </li>
+</ul>
+ </div>
    <div class="toast-anchor"></div>
-
+   <div>Icons made by <a href="https://www.freepik.com/?__hstc=57440181.e4feb6d034330074cb4216bc4f07cca3.1558610504365.1558610504365.1558610504365.1&__hssc=57440181.14.1558610504365&__hsfp=592281695" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" 			    title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" 			    title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
 
    <script src="js/app.js"></script>
    <script src="js/classes.js"></script>

@@ -12,6 +12,7 @@ function findTaskInProjectFolder(taskID,projectID){
     taskInData = project.tasks.find(task => {
         return taskID === task.id
     })
+
     return taskInData
 }
 
@@ -50,3 +51,48 @@ function createUniqueID() {
 
 }
 
+
+function getCurrentProjectID(){
+    id = data.currentProject.id
+    return id 
+}
+function getCurrentTaskID(){
+    id = data.currentTask.id
+    return id
+}
+
+function findTaskinCurentProject(taskID){
+    taskInCurrentProject = data.currentProject.tasks.find(task =>{
+        return taskId = task.id
+    })
+
+    return taskInCurrentProject
+}
+
+function updateData(){
+    // Get current task and project
+    // updare in project structure
+    // make local storage equal to project stur
+
+    projectID = getCurrentProjectID()
+    taskID = getCurrentTaskID()
+
+    projectFolder = findProjectInData(projectID)
+        // taskFolder = findTaskInProjectFolder(taskID,projectID)
+
+    // project = findProjectInData(projectID)
+
+    taskInCurrentProject = findTaskinCurentProject(taskID)
+       
+    taskInCurrentProject = data.currentTask
+
+
+
+    Object.assign(projectFolder,data.currentProject)
+
+
+
+    localStorage.setItem('projectStorage',JSON.stringify(data.projects))
+
+  
+}
