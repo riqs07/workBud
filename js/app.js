@@ -39,7 +39,7 @@ function getSelectors(){
     // taskPomodoroBtn.addEventListener('click',showPomodoroUI)
     taskCompleteBtn.addEventListener('click', completeThisTask)
     taskBackBtn.addEventListener('click',goBackToTaskList)
-    taskProgressBtn.addEventListener('click',changeTaskProgress)
+    taskProgressBtn.addEventListener('click',changeTaskProgressClick)
     
     document.body.addEventListener('click', selectTask);
     document.body.addEventListener('click', selectProject);

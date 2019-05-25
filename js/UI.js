@@ -2,11 +2,13 @@ function selectTask(e) {
    
     if (e.target.classList.contains("tasks__task-list--child")) {
         selectedTaskID = e.target.id
-       
-    
-       selectedTaskInData = data.currentProject.tasks.find(task =>{
+       projectID = getCurrentProjectID()
+       projectFolder = findProjectInData(projectID)
+
+       selectedTaskInData = projectFolder.tasks.find(task =>{
             return task.id === selectedTaskID
         })
+
         data.currentTask = selectedTaskInData
         showTask(data.currentTask)
     }
@@ -32,11 +34,11 @@ function printInAssignSelect(name, id) {
 }
 
 
-function showToast(text,y) {
+function showToast(text,type) {
 
     let color
 
-    switch (y){
+    switch (type){
         case 'success':
         color = 'green'
 
@@ -54,18 +56,13 @@ function showToast(text,y) {
     toastText = document.createTextNode(text)
 
     toastText.color = "#eee"
-   
-
     toastContainer.classList.add('toast-container',`${color}`)
-    toastActionBtn.classList.add('toast-action')
-
-
     toastContainer.appendChild(toastText)
 
     setTimeout(()=>{
         // add a fade out amimation 
         toastContainer.style.display = "none"
-        console.log('goo')
+        console.log('Add Fade in/out animation to showToast()')
         // 
     },5000)
 
@@ -112,7 +109,7 @@ function showTask(task) {
 function showProject() {
 
     if (data.currentProject === null) {
-        console.log('zzz')
+        console.log('current project is null coming from showProject()')
     } else {
 
         project = data.currentProject
@@ -134,40 +131,9 @@ function showProject() {
 
             } else if (task.isCompleted === true){
                 li.style.borderBottom = "solid 2px #67bb6b"
-                console.log('foo')
-
             }
             taskList.appendChild(li)})
-
-        // project.tasks.forEach(task => {
-        //     li = createListItem()
-        //     li.classList.add("tasks__task-list--child")
-        //     li.id = task.id
-        //     li.innerHTML = task.name          
-
-        //     if(task.isCompleted === false){
-        //         li.style.borderBottom = "solid 2px #64b4f6"
-
-        //     } else if (task.isCompleted === true){
-        //         li.style.borderBottom = "solid 2px #67bb6b"
-
-        //     }
-        //     // li.appendChild(checkIcon)
-        //     taskList.appendChild(li)
-        // })
-
-        // project.completedTasks.forEach(task =>{
-        //     if(task.isCompleted === true){
-        //         li = createListItem()
-        //     li.classList.add("tasks__task-list--child")
-        //     li.id = task.id
-        //     li.innerHTML = task.name
-        //         li.style.borderBottom = "solid 2px #67bb6b"
-        //         taskList.appendChild(li)
-        //     }
-        // })
-
-    }
+            }
 
     //see update 1 
 
@@ -180,17 +146,14 @@ function createKanbanBoard(){
     let b = []
     let c = []
     let d = []
+
+    projectID = getCurrentProjectID()
+
+    projectFolder = getCurrentProjectFolderinData()
+    console.log(projectFolder)
+
+    projectFolder.tasks.forEach((task)=>{
     
-
-
-
-    projectStorage = getProjectStorage()
-
-    data.currentProject.tasks.forEach((task)=>{
-        // FOR EACH PROJECT
-        // GO INTO FOLDER AND SEARCH ALL TASK
-        // TASKS ARE THEN SORTED BASED ON PROGRESS
-        // USE SWITCH WITH FOR EACH INSTEAD OF FIND
         switch (task.progress){
             case 'Task Backlog':
             a.push(task)
@@ -208,30 +171,7 @@ function createKanbanBoard(){
             d.push(task)
             break;
         }
-        // project.forEach((task)=>{
-        //     switch (task.progress){
-        //         case 'Task Backlog':
-        //         a.push(task)
-        //         break;
-
-        //         case 'Buffer Zone':
-        //         b.push(task)
-        //         break;
-
-        //         case 'In Progress':
-        //         c.push(task)
-        //         break;
-
-        //         case 'Done':
-        //         d.push(task)
-        //         break;
-        //     }
-
-            
-        // })
-
-
-
+       
     })
 
 
@@ -245,10 +185,7 @@ function createKanbanBoard(){
     placeTasksintoKanban(b,buffer)
     placeTasksintoKanban(c,progress)
     placeTasksintoKanban(d,done)
-    
-
-    console.log(a,b,c,d)
-}
+    }
 
 
 function placeTasksintoKanban(array,column){
@@ -263,14 +200,5 @@ function placeTasksintoKanban(array,column){
 function createListItem() {
     li = document.createElement('li')
     li.className = 'collection-child'
-
-
-    // No idea why append check icon append child needs to on function and not here
-    checkIcon = document.createElement('a')
-    checkIcon.innerHTML = ` <i class="fas fa-check"></i>`
-    checkIcon.className = 'check-icon'
-    checkIcon.style.color = "green"
-
-
     return li
 }

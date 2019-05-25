@@ -16,6 +16,12 @@ function findTaskInProjectFolder(taskID,projectID){
     return taskInData
 }
 
+function getCurrentProjectFolderinData(){
+    id = getCurrentProjectID()
+    folder = findProjectInData(id)
+    return folder
+}
+
 function getTaskValues() {
     name = tasksNameInput.value
     priority = prioritySelect.value
@@ -51,7 +57,6 @@ function createUniqueID() {
 
 }
 
-
 function getCurrentProjectID(){
     id = data.currentProject.id
     return id 
@@ -63,36 +68,32 @@ function getCurrentTaskID(){
 
 function findTaskinCurentProject(taskID){
     taskInCurrentProject = data.currentProject.tasks.find(task =>{
-        return taskId = task.id
+        return taskID = task.id
     })
 
     return taskInCurrentProject
 }
 
 function updateData(){
-    // Get current task and project
-    // updare in project structure
-    // make local storage equal to project stur
+   
+    if (data.currentTask !== null){
+        taskID = getCurrentTaskID()
+        taskInCurrentProject = findTaskinCurentProject(taskID)
 
-    projectID = getCurrentProjectID()
-    taskID = getCurrentTaskID()
+        // IDK if this is a soulution but i will leave it how I had it 
+        // Issue is that for changeProgress in particular
+        // data is updating in current task but not current project 
+        // kanban is pulling from current project
+        // so i dont know if i should make kanban ID match and then pull from 
+        // main data or what b/c the currents are how most fumctions are centered around 
+        // LINE 79 data.js
+        Object.assign(taskInCurrentProject,data.currentTask)
+        console.log(taskInCurrentProject)
 
-    projectFolder = findProjectInData(projectID)
-        // taskFolder = findTaskInProjectFolder(taskID,projectID)
-
-    // project = findProjectInData(projectID)
-
-    taskInCurrentProject = findTaskinCurentProject(taskID)
-       
-    taskInCurrentProject = data.currentTask
-
-
+    }
+    projectFolder = getCurrentProjectFolderinData()
 
     Object.assign(projectFolder,data.currentProject)
 
-
-
     localStorage.setItem('projectStorage',JSON.stringify(data.projects))
-
-  
 }

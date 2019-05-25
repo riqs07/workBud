@@ -74,11 +74,15 @@
                        
                     </ul>
 
+
+                    <button class="button button-2" id = "createKanbanBtn">Kanban Board</button>
+                    <!-- <button class="button button-2">Start Project Timer</button>
+                    <button class="button button-2">Task View</button> -->
+                    <button class="button button-2" id = "projectAssignBtn">Assign Users</button>
                     <input type="text" name="" id="" class="projects__name-input input-text" placeholder ="Enter Project Name">
                     <input type="date" class="projects__date-picker input-date">
 
-                    <button class="button button-2" id = "projects__add">New Project</button>
-                    <button class="button button-2" >New Task</button>
+                    <button class="button button-1" id = "projects__add">New Project</button>
                 </div>
 
 
@@ -86,31 +90,29 @@
 
             <div class="card">
                     <div class="card-title" id = "projectName"></div>
-                        <input type="text" name="" class="tasks__search-input input-text" placeholder="Search Tasks">
-                        <select name="taskListFilter" class="tasks__task-list--filter input-select">
+                        <!-- <input type="text" name="" class="tasks__search-input input-text" placeholder="Search Tasks"> -->
+                        <!-- <select name="taskListFilter" class="tasks__task-list--filter input-select">
                                 <option value="1">Priority</option>
                                 <option value="2">Diffuculty</option>
                                 <option value="3">Date</option>
-                            </select>
+                            </select> -->
 
-                        <select name="taskListProjectAssign" class="tasks__task-list--assign">
-                            </select>
+ 
 
-
-                            <button class="button button-2" id = "createKanbanBtn">Kanban Board</button>
-                            <button class="button button-2">Start Project Timer</button>
-                            <button class="button button-2">Task View</button>
-                            <button class="button button-2" id = "projectAssignBtn">Assign Users</button>
+                            <div class="tasks__project--panel"></div>
 
 
-                      <div id="tasks-view">View</div>
+          
+
+
                        <div class="tasks__selected-task--panel" >
+                           <div class="anchor">Anchor here Hi Hello</div>
                         <div class="tasks__selected-task--title"></div>
                         <div class="tasks__selected-task--info"></div>
                         <div class="tasks__edit-state--buttons">
                                 <button class="button button-2" id = "tasks__edit"><i class="fas fa-pencil-alt"></i> Edit</button>
                                 <button class="button button-2" id = "tasks__delete"><i class="far fa-trash-alt"></i> Delete</button>
-                                <button class="button button-2" id = "tasks__assign"><i class="fas fa-users"></i> Assign</button>
+                                <button class="button button-2" id = "tasks__assign"><i class="fas fa-users"></i> Users</button>
                                 <button class="button button-2" id = "tasks__comment"><i class="far fa-comments"></i> Comment</button>
                                 <button class="button button-2" id = "tasks__pomodoroBtn"><i class="far fa-clock"></i> Pomodoro</button>
                                 <button class="button button-2" id = "tasks__complete"><i class="fas fa-clipboard-check"></i> Complete</button>
@@ -135,6 +137,9 @@
 
             <div class="card">
                     <div class="card-title">Tasks</div>
+
+                    <select name="taskListProjectAssign" class="tasks__task-list--assign input-select">
+                        </select>
                         <input type="text" name="" class="tasks__name-input input-text" placeholder="Enter Tasks">
                         
                         <select name="prioritySelect" class="tasks__select-priority input-select select1">
@@ -150,7 +155,8 @@
                         </select>
 
                         <input type="date" class="tasks__date-picker input-date select1">
-                        <button class="btn2 wide" id = "tasks__add">Add</button>
+                        <button class=" button button-1" id = "tasks__add">Add</button>
+                        <button class=" button button-2">Search</button>
                         
                     </div>
 

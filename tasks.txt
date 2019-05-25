@@ -111,3 +111,53 @@ as far as all the UI updates go need to make it so its only one at a time
 got user add to project and task working need to hook up buttons on UI as well as add styling 
 
 gonna try to work on adding users to a project and a task
+
+
+5-24 Kanban work
+sort by user 
+add WIP Limit 
+add subtasks?
+horizontal swim lanes by user 
+work on how items are stored not just a collection item 
+add styling to actual board 
+
+
+look over html naming conventions are ggetting a bit sloppy
+same with event listenrs 
+
+
+new stuff i used 
+object.assign
+array.find
+
+
+porblems for git 
+
+
+//get appennd delete ICON WORKING 
+
+on users click i can get EITHEIR the users name or the ICOn to show up 
+not both, not sure what is happening think they are going over each other 
+ant that is causeing the icon to not show up 
+LINE 241
+
+
+// get other views to work once inside task view 
+ Figure out how to make this REACT lol
+  need to hide the task view and show this one
+and then the inverse when back is clicked think im close with this visiblity but it would require me to restructure html
+ LINE 203 tasks.js
+
+
+// Fix data matching 
+ IDK if this is a soulution but i will leave it how I had it 
+  Issue is that for changeProgress in particular data is updating in current task but not current project 
+  kanban is pulling from current project, so i dont know if i should make kanban ID match and then pull from 
+main data or what b/c the currents are how most fumctions are centered around 
+Object.assign(taskInCurrentProject,data.currentTask)
+
+LINE 79 data.js
+
+// kanban board
+ for some reason its printging something twice and im sure it has to do with updateDAta()
+    its wonky 

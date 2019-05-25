@@ -1,5 +1,7 @@
 function addTasks() {
-
+// need to update with updateData() but 
+    // dont want to mess up whole app lol
+    // create a function so the selects update automagically
     if (tasksNameInput.value === "") {
         showToast('Please Enter a Value', 'warning')
     } else {
@@ -11,12 +13,9 @@ function addTasks() {
         li.id = `${task.id}`
         li.innerHTML = `${task.name}`
 
-        li.appendChild(checkIcon)
         taskList.appendChild(li)
 
-
         userAssignedProjectID = document.querySelector('.tasks__task-list--assign').value
-
 
         projectInData = findProjectInData(userAssignedProjectID)
 
@@ -24,7 +23,7 @@ function addTasks() {
         storeTaskInProject(task, projectInData.id)
 
         tasksNameInput.value = ''
-        showToast('Task Added')
+        showToast('Task Added','success')
 
     }
 
@@ -32,6 +31,10 @@ function addTasks() {
 }
 
 function addProjects() {
+
+    // need to update with updateData() but 
+    // dont want to mess up whole app lol
+    // add some error handling 
     project = getProjectValues()
     li = createListItem()
 
@@ -89,25 +92,49 @@ function addUsersToProjectClick(){
 
 
 function addUsersToProjectUI(){
+
+    // Make this a function in UI 
+    // also search DOM for textboxID and if it exists dont print another
     textBox = document.createElement('input')
     textBox.id = 'addUserTextBox'
+    textBox.classList.add('input-text')
+    textBox.placeholder = 'Add a new User'
+
     textBox.type = 'text'
 
+
+    // create a disabled class to get rid of animation 
+    // not disabled if textbox is has words in it 
     sumbit = document.createElement('button')
-
+    sumbit.classList.add('button','button-1')
     sumbit.innerHTML = 'Submit'
+    // sumbit.disabled = true
 
+    cancel = document.createElement('button')
+    cancel.classList.add('button','button-1','red')
+    cancel.innerHTML = 'Cancel'
+
+    //prob create a class named 'created' and then find and remove all 
+    cancel.addEventListener('click',removeCreatedInputs)
+
+
+    // remove textbox and subit after a delay 
+     // add a cancel button that also deletes created inputs
+        // sumbit/add is disabled until textbox is typed in 
 
     sumbit.addEventListener('click',addUserToProjectInData)
+  
+    projectInfoPanel = document.querySelector('.tasks__project--panel')
 
-    /// think error is occuring here as tasks panel isnt a thing until
-    // a task is selected fix later 
-    taskInfoPanel = document.querySelector('.tasks__selected-task--info')
+    parent = projectInfoPanel.parentNode
 
-    parent = taskInfoPanel.parentNode
+    parent.insertBefore(textBox,projectInfoPanel)
+    parent.insertBefore(sumbit,projectInfoPanel)
+    parent.insertBefore(cancel,projectInfoPanel)
+}
 
-    parent.insertBefore(textBox,taskInfoPanel)
-    parent.insertBefore(sumbit,taskInfoPanel)
+function removeCreatedInputs(){
+console.log('Inputs Removed')
 }
 
 function addUserToProjectInData(){
@@ -117,6 +144,7 @@ function addUserToProjectInData(){
     if (newUser != ""){
         data.currentProject.users.push(newUser)
         updateData()
+        console.log('Placeholder for Inputs Removed function')
         showToast('User Added to project','success')
     } else {
         showToast('Please Enter a value','warning')
@@ -125,35 +153,121 @@ function addUserToProjectInData(){
   
 
 function addUsersToTasksClick(){
-  
+  // rename to user ui 
+  // just shows a list of currently assigned users 
+  // user ui can assign pic to user
+  // assign user to task 
+  // remove user from task 
+  // prob have an assign user btn that opens up that specific ui
     addUserToTasksUI()
 
 }
 
 function addUserToTasksUI(){
 
-  if (data.currentProject.users.length == 0){
-      showToast('Please Add Users to the Project','warning')
-  } else {
+    // maybe hide all other task panel stuff and only have this version 
+    // of UI and back button 
+    // users should be an object with name and team maybe a way to send message
+    // but that would come later with liek backend stuff IDK 
+    // add little x mark to user collection item for delete 
+    // just have edit btn go back to add and have add open up the select 
+    // only show users not currently assigned 
 
     select = document.createElement('select')
     select.id = 'userList'
-    sumbit = document.createElement('button')
-    sumbit.innerHTML = 'Submit'
-    sumbit.addEventListener('click',addUserToTaskInData)
+    select.classList.add('input-select')
+
+    ul = document.createElement('ul')
+    ul.id = 'usersUl'
+    ul.classList.add('collection')
+
+    addUser = document.createElement('button')
+    addUser.classList.add('button','button-1')
+    addUser.innerHTML = 'Edit Users'
+
+    picAssign = document.createElement('button')
+    picAssign.classList.add('button','button-1',)
+    picAssign.innerHTML = 'Set Picture'
+
+    cancel = document.createElement('button')
+    cancel.classList.add('button','button-1',)
+    cancel.innerHTML = 'Cancel'
+
+    addUser.addEventListener('click',addUserToTaskInData)
+
+
+    editStateBack = document.createElement('button')
+    editStateBack.classList.add('button','button-1')
+    editStateBack.innerHTML = 'Back'
+    editStateBack.addEventListener('click',()=>{
+        
+        // Figure out how to make this REACT lol
+        // need to hide the task view and show this one
+        // and then the inverse when back is clicked
+        // think im close with this visiblity but it would reqiore
+        // me to restructure html
+        // LINE 203 tasks.js
+
+
+        // parent.style.visibility = "hidden"
+        // taskInfoPanel.style.visibility  = "visible"
+    })
 
 
     taskInfoPanel = document.querySelector('.tasks__selected-task--info')
 
+
+    // taskInfoPanel.style.visibility = "hidden"
+
+
+    anchor = document.querySelector('.anchor' )
+
     parent = taskInfoPanel.parentNode
+    // parent = anchor.parentNode
 
 
+    parent.insertBefore(select,anchor)
+    parent.insertBefore(addUser,anchor)
+    parent.insertBefore(picAssign,anchor)
+    parent.insertBefore(ul,anchor)
+    parent.insertBefore(editStateBack,anchor)
+
+
+
+ 
+    data.currentProject.users.forEach(user =>{
+        li = createListItem()
+
+        //get appenmd delete ICON WORKING 
+        // remove = createDeleteIcon()
+
+        // li.appendChild(remove)
+        li.textContent = user
+
+        document.querySelector('#usersUl').appendChild(li)
+    })
 
     data.currentProject.users.forEach((user)=>{
         document.querySelector('#userList').innerHTML +=
         `<option value="${user}">${user}</option`
     })
-  }
+  
+}
+
+function createDeleteIcon(){
+
+    icon = document.createElement('a')
+    icon.innerHTML = '<i class="fas fa-times"></i>'
+    icon.className = 'delete icon'
+    icon.style.color = 'red'
+
+    return icon
+}
+
+function saveHTML(x){
+    html = document.querySelector(`.${x}`).innerHTML
+
+    return html
 }
 
 function addUserToTaskInData(){
@@ -163,6 +277,7 @@ function addUserToTaskInData(){
    data.currentTask.users.push(newUser)
    showToast('User assigned to Task','success')
 
+   updateData()
   
 
    
@@ -234,26 +349,25 @@ function goBackToTaskList(){
     showProject()
 }
 
-function changeTaskProgress(){
+function changeTaskProgressClick(){
     select = document.createElement('select')
     sumbit = document.createElement('button')
 
 
-    a = document.createElement('option')
-    b = document.createElement('option')
-    c = document.createElement('option')
-    d = document.createElement('option')
+    backlog = document.createElement('option')
+    buffer = document.createElement('option')
+    inProgress = document.createElement('option')
+    done = document.createElement('option')
 
-    a.innerHTML = 'Task Backlog'
-    b.innerHTML = 'Buffer Zone'
-    c.innerHTML = 'In Progress'
-    d.innerHTML = 'Done'
+    backlog.innerHTML = 'Task Backlog'
+    buffer.innerHTML = 'Buffer Zone'
+    inProgress.innerHTML = 'In Progress'
+    done.innerHTML = 'Done'
 
-    select.appendChild(a)
-    select.appendChild(b)
-    select.appendChild(c)
-    select.appendChild(d)
-
+    select.appendChild(backlog)
+    select.appendChild(buffer)
+    select.appendChild(inProgress)
+    select.appendChild(done)
 
     select.id = 'progress-select'
 
@@ -274,7 +388,6 @@ function changeTaskProgress(){
 function submitChangeTaskProgress(){
    newProgress = document.querySelector('#progress-select').value
    data.currentTask.progress = newProgress
-
    updateData()
    showToast('Progress Updated','success')
 
