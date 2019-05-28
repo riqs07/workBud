@@ -20,29 +20,29 @@ function getProjectStorage() {
 
 }
 
-function printTaskStorage() {
-
-    if (data.currentProject.task !== null) {
-        projectTasks = data.currentProject.tasks
-
-
-        projectTasks.forEach(task => {
-
-            li = createListItem()
-            li.classList.add("tasks__task-list--child")
-            li.id = `${task.id}`
-            li.innerHTML = task.name
+// function printTaskStorage() {
+// // Legacy
+//     if (data.currentProject.task !== null) {
+//         projectTasks = data.currentProject.tasks
 
 
-            li.appendChild(checkIcon)
+//         projectTasks.forEach(task => {
 
-            taskList.appendChild(li)
-        });
-    } else {
-        console.log('ss')
-    }
+//             li = createListItem()
+//             li.classList.add("tasks__task-list--child")
+//             li.id = `${task.id}`
+//             li.innerHTML = task.name
 
-}
+
+//             li.appendChild(checkIcon)
+
+//             taskList.appendChild(li)
+//         });
+//     } else {
+//         console.log('ss')
+//     }
+
+// }
 
 function printProjectStorage() {
 
@@ -78,6 +78,9 @@ function checkProjectStorage() {
     }
 }
 function storeCurrentProject() {
+    // Not super sure how its remembering which is the current project
+    // shouldnt be working but will leave alone for now
+    // gonna need to go down this rabbit hole and REfractor 
     project = data.currentProject
     project = JSON.stringify(project)
     localStorage.setItem('currentProject', project)
@@ -124,11 +127,6 @@ function storeProject(newProject) {
 }
 
 function updateStorage(){
-
-
-
     localStorage.setItem('projectStorage',JSON.stringify(data.projects))
-
-
 }
 

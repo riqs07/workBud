@@ -81,18 +81,6 @@
     border: 2px solid green;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); }
 
-.select1 {
-  font-size: 20px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
-  box-shadow: 0 2px 4px rbga(0, 0, 0, 0.12);
-  background-color: transparent;
-  margin-bottom: 5px;
-  border-radius: 5px; }
-  .select1:focus {
-    border: 2px solid #65b5f6;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-    box-shadow: 0 3px 6px rbga(0, 0, 0, 0.1); }
-
 .timer2 {
   font-size: 3rem;
   color: green; }
@@ -193,18 +181,39 @@
   border: 2px solid grey;
   font-size: 1.25em;
   transition: all .3s; }
+  .input-text:hover {
+    border: 2px solid #65b5f6; }
   .input-text:focus {
     border: 2px solid #65b5f6;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
     box-shadow: 0 2px 4px rbga(0, 0, 0, 0.12); }
-  .input-text:hover {
+
+.input-textArea {
+  resize: none;
+  transition: all .3s; }
+  .input-textArea:focus {
+    border: 2px solid #65b5f6;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 2px 4px rbga(0, 0, 0, 0.12); }
+  .input-textArea:hover {
     border: 2px solid #65b5f6; }
 
 .input-select {
-  font-size: 1.25em; }
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 2px 4px rbga(0, 0, 0, 0.12);
+  background-color: transparent;
+  margin-bottom: 5px;
+  border-radius: 5px;
+  font-size: 1.25em;
+  transition: all .3s; }
+  .input-select:hover {
+    border: 2px solid #65b5f6; }
 
 .input-date {
-  font-size: 1.25em; }
+  font-size: 1.25em;
+  transition: all .3s; }
+  .input-date:hover {
+    border: 2px solid #65b5f6; }
 
 .toast-anchor {
   position: relative; }
@@ -285,21 +294,29 @@
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 5px; }
 
-.kanban__zone--todo {
-  grid-column: 1/2;
-  background-color: red; }
-
-.kanban__zone--buffer {
-  grid-column: 2/3;
-  background-color: blue; }
-
-.kanban__zone--progress {
-  grid-column: 3/4;
-  background-color: green; }
-
-.kanban__zone--done {
-  grid-column: 4/5;
-  background-color: purple; }
+.kanban {
+  border: 2px solid black;
+  background-color: white; }
+  .kanban-card {
+    font-size: 1.25em;
+    border-radius: 5px;
+    border: 2px solid black;
+    padding: 10px;
+    margin: 10px;
+    background-color: #eee; }
+  .kanban-title {
+    font-size: 1.5em; }
+  .kanban__zone--todo {
+    border-right: 2px solid black;
+    grid-column: 1/2; }
+  .kanban__zone--buffer {
+    border-right: 2px solid black;
+    grid-column: 2/3; }
+  .kanban__zone--progress {
+    border-right: 2px solid black;
+    grid-column: 3/4; }
+  .kanban__zone--done {
+    grid-column: 4/5; }
 
 .flex {
   display: flex;

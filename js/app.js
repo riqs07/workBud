@@ -27,19 +27,20 @@ function getSelectors(){
     taskCompleteBtn = document.querySelector('#tasks__complete')
     taskBackBtn = document.querySelector('#tasks__back')
     taskProgressBtn = document.querySelector('#tasks__progress')
+    taskMigrateBtn = document.querySelector('#tasks__migrate')
 
     document.querySelector('#createKanbanBtn').addEventListener('click',createKanbanBoard)
     
     
     taskEditBtn.addEventListener('click', editThisTask)
     taskDeleteBtn.addEventListener('click', deleteThisTask)
-    // taskMigrateBtn.addEventListener('click', migrateThisTask)
+    taskMigrateBtn.addEventListener('click', migrateThisTaskClick)
     taskAssignBtn.addEventListener('click', addUsersToTasksClick)
     taskCommentBtn.addEventListener('click', createInputsForComment)
     // taskPomodoroBtn.addEventListener('click',showPomodoroUI)
     taskCompleteBtn.addEventListener('click', completeThisTask)
     taskBackBtn.addEventListener('click',goBackToTaskList)
-    taskProgressBtn.addEventListener('click',changeTaskProgressClick)
+    taskProgressBtn.addEventListener('click',changeTaskProgressUI)
     
     document.body.addEventListener('click', selectTask);
     document.body.addEventListener('click', selectProject);
@@ -58,5 +59,28 @@ function init() {
     printProjectStorage()
 }
 
+
+function addUsersToProjectClick(){
+    //okay if this function just calls another function 
+    // then just have click event attached to that one
+    // will leave it here for now 
+     addUsersToProjectUI()
+}
+
+
+function addUsersToTasksClick(){
+    // rename to user ui 
+    // just shows a list of currently assigned users 
+    // user ui can assign pic to user
+    // assign user to task 
+    // remove user from task 
+    // prob have an assign user btn that opens up that specific ui
+      addUserToTasksUI()
+  
+  }
+
+  function migrateThisTaskClick(){
+      migrateThisTaskUI()
+  }
 
 document.addEventListener('DOMContentLoaded', init, false);

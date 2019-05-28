@@ -3,3 +3,10 @@
     left: 50%;
     transform: translateX(-50%);
 }
+
+@mixin input-hover{
+    transition: all .3s;
+    &:hover{
+        border: 2px solid $blue;
+    }
+}

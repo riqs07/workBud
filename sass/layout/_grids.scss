@@ -7,23 +7,43 @@
 
 .kanban{
 
+    border: 2px solid black;
+    background-color: white;
+
+    &-card{
+        font-size: 1.25em;
+        border-radius: 5px;
+        border:2px solid black;
+        padding: 10px;
+        margin: 10px;
+        background-color: #eee;
+        
+    }
+
+    &-title{
+        font-size: 1.5em;
+        
+    }
+
     &__zone{
 
         &--todo{
+            border-right: 2px solid black;
+            
             grid-column: 1/2;
-            background-color: red;
         }
         &--buffer{
+            border-right: 2px solid black;
+
             grid-column: 2/3;
-            background-color: blue;
         }
         &--progress{
+            border-right: 2px solid black;
+
             grid-column: 3/4;
-            background-color: green;
         }
         &--done{
             grid-column: 4/5;
-            background-color: purple;
         }
     }
     

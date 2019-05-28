@@ -7,16 +7,26 @@ class Task {
         this.id = createUniqueID()
         this.name = name
         this.priority = priority
+        this.urgency = null
         this.diffuculty = diffuculty
         this.dueDate = dueDate
         this.users = []
 
         this.timeStamp = {
-            date: d.toLocaleDateString(),
+
+            created:{
+                date: d.toLocaleDateString(),
             time: d.toLocaleTimeString(),
             day: d.getDay(),
             month: d.getMonth()
+        },
+         completed: {
+            date: null,
+            time: null,
+            day: null,
+            month: null
         }
+    }
         this.pomodoros = {
             totalTime: 0,
             totalPomodoros: 0,
@@ -35,7 +45,7 @@ class Project {
         this.name = name
         this.dueDate = dueDate
         this.tasks = []
-        this.completedTasks = []
+        this.archive = []
         this.comments = []
         this.pomodoros = {
             totalTime: null,
@@ -43,10 +53,18 @@ class Project {
         }
         this.users = []
         this.timeStamp = {
-            date: d.toLocaleDateString(),
-            time: d.toLocaleTimeString(),
-            day: d.getDay(),
-            month: d.getMonth()
+            created:{
+                date: d.toLocaleDateString(),
+                time: d.toLocaleTimeString(),
+                day: d.getDay(),
+                month: d.getMonth()
+            },
+            completed: {
+                date: null,
+                time: null,
+                day: null,
+                month: null
+            }
         }
 
     }
@@ -72,12 +90,47 @@ class Habit {
     }
 }
 
-
-
-
-data = {
-    unAssignedTasks: [],
+class User {
+    constructor(name){
+        this.id = createUniqueUserID()
+        this.name = name;
+        this.team = null;
+        this.email = `${name}@workBud.com`
+        this.handle = `@${name}`;
+        this.tasks = [];
+        
+        // splice array by space so handle isnt weird if user enters first and last name
+        // maybe get space and insert a hyphen
+    
+    }
+}
+        data = {
+    users: [],
     projects: [],
     currentTask: null,
     currentProject: null
+}
+
+class fool {
+    constructor(){
+        let d = new Date();   
+        this.timeStamp = {
+            created:{
+                date: d.toLocaleDateString(),
+                time: d.toLocaleTimeString(),
+                day: d.getDay(),
+                month: d.getMonth()
+            },
+            completed: {
+                date: d.toLocaleDateString(),
+                time: d.toLocaleTimeString(),
+                day: d.getDay(),
+                month: d.getMonth()
+            }
+            
+        }
+    }
+
+    
+
 }

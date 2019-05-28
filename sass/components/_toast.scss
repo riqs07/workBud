@@ -1,0 +1,26 @@
+.toast{
+
+    &-anchor{
+        position: relative;
+
+    }
+
+    &-container{
+        position: absolute;
+        border-radius: 5px;
+        padding:15px;
+        margin: 15px;;
+        animation: toastShow .5s ease-in
+    }
+
+    &-action{
+        color: rgb(0, 0, 0);
+        text-transform: uppercase;
+        margin-left: 20px;
+        padding: 5px;
+        &:hover{
+            background-color: rgba(0, 0, 0, 0.5);
+            transition: all .5s;
+        }
+    }
+  }

@@ -8,7 +8,7 @@
         border: 2px solid grey;
         font-size: 1.25em;
     
-        transition: all .3s;
+        @include input-hover;
     
         &:focus{
             border: 2px solid $blue;
@@ -16,18 +16,34 @@
             box-shadow: $shadow-p2-2;
         }
 
-        &:hover{
+    }
+
+    &-textArea{
+        resize: none;
+        &:focus{
             border: 2px solid $blue;
+            box-shadow: $shadow-p2-1;
+            box-shadow: $shadow-p2-2;
         }
+        @include input-hover;
     }
 
     &-select{
-        
+        box-shadow: $shadow-p2-1;
+        box-shadow: $shadow-p2-2;
+        background-color: transparent;
+        margin-bottom: 5px;
+        border-radius: 5px;
         font-size: 1.25em;
+
+        @include input-hover;
     }
 
     &-date{
+       
         font-size: 1.25em;
+        @include input-hover;
+
     }
    
 }

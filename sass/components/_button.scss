@@ -66,20 +66,7 @@
 
 
 
-.select1{
-    font-size: 20px;
-    box-shadow: $shadow-p2-1;
-    box-shadow: $shadow-p2-2;
-    background-color: transparent;
-margin-bottom: 5px;
-border-radius: 5px;
 
-&:focus{
-    border: 2px solid $blue;
-    box-shadow: $shadow-p3-1;
-    box-shadow: $shadow-p3-2;
-}
-}
 
 .timer2{
     font-size: 3rem;
