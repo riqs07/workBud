@@ -128,5 +128,6 @@ function storeProject(newProject) {
 
 function updateStorage(){
     localStorage.setItem('projectStorage',JSON.stringify(data.projects))
+    localStorage.setItem('users',JSON.stringify(data.users))
 }
 

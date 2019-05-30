@@ -99,11 +99,18 @@ function addUserToProjectInData(){
     name = document.querySelector('#addUserTextBox').value
 
     folder = getCurrentProjectFolderinData()
+    allUsers = getUsers()
 
     if (name != ""){
         user = new User(name)
 
         folder.users.push(user)
+        // pushing to all will be another funciton where you can add global users
+        // gonna leave it for now 
+        data.users.push(user)
+        // Tinker with adding user to own data 
+        // and pull from their vs the folder.users
+        
         updateStorage()
         removeCreatedInputs()
         showToast('User Added to project','success')
@@ -114,9 +121,35 @@ function addUserToProjectInData(){
   
 
 function addUserToTaskInData(){
-    newUser = document.querySelector('#userList').value
+    id = document.querySelector('#userList').value
+
+    folder = getCurrentProjectFolderinData()
     task = getCurrentTaskinData()
-    task.users.push(newUser)
+
+    // grab from all users 
+    // folder is placeholder
+    //mutate from all users not from folder
+    // get better name than shrt
+   user = folder.users.find(user =>{
+        return id = user.id
+        
+    })
+    
+    console.log(id,user)
+
+    short = {
+        id:task.id,
+        name:task.name,
+        timeWorked:null
+    }
+
+    // add error handling  adn duplicate check 
+    // and possibly make into a seperate function
+
+
+    user.tasks.push(short)
+    task.users.push(user)
+    
    showToast('User assigned to Task','success')
    updateStorage() 
 }
@@ -151,17 +184,26 @@ function commentThisTask() {
 
 function completeThisTask() {
    
-    task = getCurrentTaskinData()
+    currentTask = getCurrentTaskinData()
     folder = getCurrentProjectFolderinData()
 
-    task.isCompleted = true;
-    task.progress = "Done"
+    currentTask.isCompleted = true;
+    currentTask.progress = "Done"
 
-    // archive isnt set up yet but this will push into it 
-    completeThisTaskTimeStamp()
+    completeThisTaskTimeStamp(task)
 
-   folder.archive.push(task)
-    showToast('Task Completed','success')
+    alreadyInArchive = folder.archive.includes(currentTask)
+
+    if (alreadyInArchive === false){
+        folder.archive.push(task)
+        showToast('Task Completed','success')
+        updateStorage()
+
+
+    } else if (alreadyInArchive = true) {
+        showToast('Task has already been completed','warning')
+    }
+
 
 }
 
@@ -191,15 +233,20 @@ function submitChangeTaskProgress(){
 
     newProgress = select.value
 
+    if (newProgress === "Done"){
+        completeThisTask()
+    } else {
+        task.progress = newProgress
+        updateStorage()
+        showToast('Progress Updated','success')
+    
+    }
+
     // setInterval(()=>{
     //     select.remove()
     //     sumbit.remove()
     // },400) 
-   
-    task.progress = newProgress
-    updateStorage()
-    showToast('Progress Updated','success')
-
+  
 
 }
 

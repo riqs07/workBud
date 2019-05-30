@@ -11,7 +11,10 @@
 </head>
 <body>
 <nav class="nav">
-    <h2 class="nav__header">WorkBuddy</h2>
+    <h2 class="nav__header">WorkBuddy
+        <button class="button button-1" onclick="console.log(data)" >Log Data</button>
+        <button class="button button-1" onclick="localStorage.clear()">Clear storage</button>
+    </h2>
 </nav>
 
 <div id="anchor"></div>
@@ -118,7 +121,7 @@
                                 <button class="button button-2" id = "tasks__complete"><i class="fas fa-clipboard-check"></i> Complete</button>
                                 <button class="button button-2" id = "tasks__progress"><i class="fas fa-tachometer-alt"></i> Progress</button>
                                 <button class="button button-1" id = "tasks__back"><i class="fas fa-arrow-left"></i> Back</button>
-                                <button class="button button-2" id = "tasks__migrate"><i class="fas fa-people-carry"></i>Migrate Task</button>
+                                <button class="button button-2" id = "tasks__migrate"><i class="fas fa-people-carry"></i> Move</button>
 
                             </div>
                        </div>

@@ -29,6 +29,12 @@ function getCurrentTaskinData(){
     return task;
 }
 
+function getUsers(){
+    allUsers = data.users
+    return allUsers
+}
+
+
 function getTaskValues() {
     name = tasksNameInput.value
     priority = prioritySelect.value

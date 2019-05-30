@@ -1,3 +1,10 @@
+data = {
+    users: [],
+    projects: [],
+    currentTask: null,
+    currentProject: null
+}
+
 
 class Task {
     constructor(name, priority, diffuculty, dueDate) {
@@ -104,33 +111,4 @@ class User {
     
     }
 }
-        data = {
-    users: [],
-    projects: [],
-    currentTask: null,
-    currentProject: null
-}
-
-class fool {
-    constructor(){
-        let d = new Date();   
-        this.timeStamp = {
-            created:{
-                date: d.toLocaleDateString(),
-                time: d.toLocaleTimeString(),
-                day: d.getDay(),
-                month: d.getMonth()
-            },
-            completed: {
-                date: d.toLocaleDateString(),
-                time: d.toLocaleTimeString(),
-                day: d.getDay(),
-                month: d.getMonth()
-            }
-            
-        }
-    }
-
     
-
-}

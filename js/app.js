@@ -42,8 +42,17 @@ function getSelectors(){
     taskBackBtn.addEventListener('click',goBackToTaskList)
     taskProgressBtn.addEventListener('click',changeTaskProgressUI)
     
+
+
+
     document.body.addEventListener('click', selectTask);
     document.body.addEventListener('click', selectProject);
+
+
+
+
+    document.body.addEventListener('click', kanbanCardClick);
+    document.body.addEventListener('mouseover', kanbanUsersHover);
     
     taskAddBtn.addEventListener('click', addTasks)
     projectsAddBtn.addEventListener('click', addProjects)
@@ -84,3 +93,4 @@ function addUsersToTasksClick(){
   }
 
 document.addEventListener('DOMContentLoaded', init, false);
+

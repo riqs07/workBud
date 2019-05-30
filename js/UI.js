@@ -15,6 +15,37 @@ function selectTask(e) {
     }
 }
 
+
+
+function kanbanCardClick(e){
+
+    if (e.target.classList.contains("kanban-card")) {
+
+        taskID = e.target.id
+        projectID = getCurrentProjectID()
+        task = findTaskInProjectFolder(taskID,projectID)
+        showTask(task)
+
+    }
+    
+}
+
+function kanbanUsersHover(e){
+    if (e.target.parentElement.classList.contains("foo")) {
+
+        taskID = e.target.parentElement.parentElement.id
+        projectID = getCurrentProjectID()
+
+        task = findTaskInProjectFolder(taskID,projectID)
+
+        // Eventually get list of users to show in a tooltip
+        
+        task.users.forEach(user =>{
+            console.log(user.name,"Hover Name List")
+        })
+
+    }
+}
 function selectProject(e) {
 
     if (e.target.classList.contains("projects__project-list--child")) {
@@ -93,16 +124,24 @@ function showTask(task) {
             break;
     }
 
+
+    
     /// Convert Due Date Time info to local String 
     component = `<ul class="collection">
     <li class="collection-child">This is a <span class = ${color}>${task.diffuculty}</span> task! </li>
     <li class="collection-child">${task.pomodoros.totalTime} mins worked</li>
     <li class="collection-child">Kanban Zone: ${task.progress}</li>
     <li class="collection-child">${task.priority} priority </li>
-    <li class="collection-child">Created on ${task.timeStamp.date}  </li>
+    <li class="collection-child">Created on ${task.timeStamp.created.date}  </li>
     <li class="collection-child">Due on ${task.dueDate} </li>
    
 </ul>`
+
+    // Get it to show a new li if task is completed
+    // basiclly the component is also the ul so probs need to change that
+//  if (task.isCompleted === true){
+//      component += `  <li class="collection-child">Completed on ${task.timeStamp.completed.date} </li>`
+//  }
 
     document.querySelector('.tasks__selected-task--info').innerHTML = component
 
@@ -115,14 +154,11 @@ function showProject() {
     } else {
 
         taskList.innerHTML = ""
-        document.querySelector('.projects__selected-task--title').innerHTML = `<h3>${project.name} </h3>`
-        document.querySelector('#projectName').innerHTML = `<h3>${project.name} </h3>`
+        folder = getCurrentProjectFolderinData()
 
-
-        projectFolder = getCurrentProjectFolderinData()
-
-
-        projectFolder.tasks.forEach(task => {
+        document.querySelector('#projectName').innerHTML = `<h3>${folder.name} </h3>`
+       
+        folder.tasks.forEach(task => {
             li = createListItem()
             li.classList.add("tasks__task-list--child")
             li.id = task.id
@@ -149,9 +185,9 @@ function createKanbanBoard() {
     let c = []
     let d = []
 
-    projectFolder = getCurrentProjectFolderinData()
+    folder = getCurrentProjectFolderinData()
 
-    projectFolder.tasks.forEach((task) => {
+    folder.tasks.forEach((task) => {
 
         switch (task.progress) {
             case 'Task Backlog':
@@ -198,9 +234,8 @@ function placeTasksintoKanban(array, column) {
 
 
         li.innerHTML = task.name
-        li.appendChild(comments)
-        li.appendChild(users)
-        column.appendChild(li)
+       li.append(users,comments)
+        column.append(li)
     })
 }
 
@@ -315,7 +350,7 @@ function addUserToTasksUI(){
 
     usersContainer = document.createElement('div')
 
-    usersContainer.append(ul,addUser,editStateBack)
+    usersContainer.append(ul,addUser,editStateBack,select)
 
      parent.before(usersContainer)
 
@@ -334,10 +369,10 @@ function addUserToTasksUI(){
 
 
     // Not sure what im going to need select for but whatever
-    // folder.users.forEach((user)=>{
-    //     document.querySelector('#userList').innerHTML +=
-    //     `<option value="${user}">${user}</option`
-    // })
+    folder.users.forEach((user)=>{
+        document.querySelector('#userList').innerHTML +=
+        `<option value="${user.id}">${user.name}</option`
+    })
   
 }
 
@@ -455,7 +490,7 @@ function createUsersIcon() {
     // or have the user pics show 
     icon = document.createElement('a')
     icon.innerHTML = '<i class="fas fa-users"></i>'
-    icon.className = 'icon'
+    icon.classList.add('icon', 'foo') 
     icon.style.color = '#232b2b'
 
     return icon
