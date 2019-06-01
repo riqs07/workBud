@@ -160,4 +160,23 @@ LINE 79 data.js
 
 // kanban board
  for some reason its printging something twice and im sure it has to do with updateDAta()
-    its wonky 
+    its wonky
+
+
+    6-1
+    might make this with MVC pattern which would require another huge refractor but
+    i can see its merits as on user action have it do a couple diffthing
+
+    ui.showTask(task)
+    data.save()
+    yada yada think that will make it more testable and will make unit and intergration tests managable for me
+    basically having one funciton run on an event and that function consist of smaller functions and those\
+    smaller functions consist of even smaller functions will have to refreance calorie tracker app as its been months 
+
+    since i tried to do it 
+
+    like look at Kanbancommentclick and you will see a perfect reason why my fucntions are not reusable
+    i should be able to have a simple commentTask function which takes in a taskID and a string and comments to that task
+    and i would be able to call it from Kanbancommentclick but i cant since its doing a whole bunch of wonky stuff
+    
+

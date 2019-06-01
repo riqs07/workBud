@@ -24,6 +24,8 @@ function kanbanCardClick(e){
         taskID = e.target.id
         projectID = getCurrentProjectID()
         task = findTaskInProjectFolder(taskID,projectID)
+
+        data.currentTask = task.id
         showTask(task)
 
     }
@@ -31,18 +33,52 @@ function kanbanCardClick(e){
 }
 
 function kanbanUsersHover(e){
-    if (e.target.parentElement.classList.contains("foo")) {
-
+    if (e.target.parentElement.classList.contains("user-hover")) {
+        e.target.parentElement.classList.add('tooltip')
         taskID = e.target.parentElement.parentElement.id
         projectID = getCurrentProjectID()
 
         task = findTaskInProjectFolder(taskID,projectID)
 
-        // Eventually get list of users to show in a tooltip
+        // add another event listenr which deletes this when not hover
+        // in html it just gets added over and over and over again
+        // evem though its not visable 
         
+
+        list = document.createElement('ul')
+
         task.users.forEach(user =>{
-            console.log(user.name,"Hover Name List")
+            li = document.createElement('li')
+            li.textContent = user.name
+            list.appendChild(li)
         })
+       
+        list.classList.add('tooltiptext')
+        e.target.parentElement.append(list)
+    }
+}
+
+function kanbanCommentClick(e){
+    if (e.target.parentElement.classList.contains("comment-click")) {
+        taskID = e.target.parentElement.parentElement.id
+        projectID = getCurrentProjectID()
+        task = findTaskInProjectFolder(taskID,projectID)
+
+        textBox = document.createElement('input')
+        textBox.id = 'addCommentTextBox'
+        textBox.classList.add('input-text')  
+        textBox.type = 'text'
+    
+    
+        sumbit = document.createElement('button')
+        sumbit.classList.add('button', 'button-1')
+        sumbit.innerHTML = 'Submit'
+        
+
+        //place holder append as i need to figure out how its gonna show
+        // thinking a modal but IDK yet thats a UI UX decision i have yet to make
+        console.log('See MVC note 6-1')
+        document.querySelector('#anchor').append(textBox,sumbit)
 
     }
 }
@@ -479,7 +515,7 @@ function createCommentIcon() {
     // add event listner so small textbox shows up to add task
     icon = document.createElement('a')
     icon.innerHTML = '<i class="far fa-comments"></i>'
-    icon.className = 'icon'
+    icon.classList.add('icon', 'comment-click') 
     icon.style.color = '#232b2b'
 
     return icon
@@ -490,7 +526,7 @@ function createUsersIcon() {
     // or have the user pics show 
     icon = document.createElement('a')
     icon.innerHTML = '<i class="fas fa-users"></i>'
-    icon.classList.add('icon', 'foo') 
+    icon.classList.add('icon', 'user-hover') 
     icon.style.color = '#232b2b'
 
     return icon

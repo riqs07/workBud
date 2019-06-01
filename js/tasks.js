@@ -130,11 +130,15 @@ function addUserToTaskInData(){
     // folder is placeholder
     //mutate from all users not from folder
     // get better name than shrt
+
+    // for some reason this is always g
+    // only updating with one name 
+    // its like rewriting the rest of the users 
    user = folder.users.find(user =>{
         return id = user.id
         
     })
-    
+
     console.log(id,user)
 
     short = {
