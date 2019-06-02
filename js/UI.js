@@ -82,6 +82,29 @@ function kanbanCommentClick(e){
 
     }
 }
+
+function kanbanCalenderHover(e){
+    if (e.target.parentElement.classList.contains("calender-hover")) {
+        e.target.parentElement.classList.add('tooltip')
+        taskID = e.target.parentElement.parentElement.id
+        projectID = getCurrentProjectID()
+
+        task = findTaskInProjectFolder(taskID,projectID)
+
+        // add another event listenr which deletes this when not hover
+        // in html it just gets added over and over and over again
+        // evem though its not visable 
+
+        let list = document.createElement('div');
+
+        // find a way to convert date string
+        list.textContent =`Due on ${task.dueDate}`
+        
+        list.classList.add('tooltiptext')
+        e.target.parentElement.append(list)
+
+    }
+}
 function selectProject(e) {
 
     if (e.target.classList.contains("projects__project-list--child")) {
@@ -263,6 +286,7 @@ function placeTasksintoKanban(array, column) {
     array.forEach((task) => {
         comments = createCommentIcon()
         users = createUsersIcon()
+        calender = createCalenderIcon()
 
         li = document.createElement('li')
         li.className = 'kanban-card'
@@ -270,7 +294,7 @@ function placeTasksintoKanban(array, column) {
 
 
         li.innerHTML = task.name
-       li.append(users,comments)
+       li.append(users,comments,calender)
         column.append(li)
     })
 }
@@ -516,6 +540,15 @@ function createCommentIcon() {
     icon = document.createElement('a')
     icon.innerHTML = '<i class="far fa-comments"></i>'
     icon.classList.add('icon', 'comment-click') 
+    icon.style.color = '#232b2b'
+
+    return icon
+}
+function createCalenderIcon() {
+
+    icon = document.createElement('a')
+    icon.innerHTML = '<i class="fas fa-calendar-week"></i>'
+    icon.classList.add('icon', 'calender-hover') 
     icon.style.color = '#232b2b'
 
     return icon

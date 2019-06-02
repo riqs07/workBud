@@ -54,6 +54,7 @@ function getSelectors(){
     document.body.addEventListener('click', kanbanCardClick);
     document.body.addEventListener('mouseover', kanbanUsersHover);
     document.body.addEventListener('click', kanbanCommentClick);
+    document.body.addEventListener('mouseover', kanbanCalenderHover);
     
     taskAddBtn.addEventListener('click', addTasks)
     projectsAddBtn.addEventListener('click', addProjects)
