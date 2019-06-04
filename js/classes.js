@@ -7,14 +7,14 @@ data = {
 
 
 class Task {
-    constructor(name, priority, diffuculty, dueDate) {
+    constructor(name, importance,urgency, diffuculty, dueDate) {
 
         let d = new Date();
 
         this.id = createUniqueID()
         this.name = name
-        this.priority = priority
-        this.urgency = null
+        this.importance = importance
+        this.urgency = urgency
         this.diffuculty = diffuculty
         this.dueDate = dueDate
         this.users = []

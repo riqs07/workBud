@@ -1,8 +1,11 @@
 function getSelectors(){
 
     tasksNameInput = document.querySelector('.tasks__name-input')
+    //rename to importance when i have more time 
     prioritySelect = document.querySelector('.tasks__select-priority')
+    urgencySelect = document.querySelector('.tasks__select-urgency')
     difficultySelect = document.querySelector('.tasks__difficulty-priority')
+    
     taskAddBtn = document.querySelector('#tasks__add')
     taskList = document.querySelector('.tasks__task-list')
     taskDatePicker = document.querySelector('.tasks__date-picker')

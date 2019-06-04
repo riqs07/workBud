@@ -318,6 +318,24 @@
   .kanban__zone--done {
     grid-column: 4/5; }
 
+.matrix-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-gap: 5px; }
+
+.matrix-1 {
+  background-color: red; }
+
+.matrix-2 {
+  background-color: green; }
+
+.matrix-3 {
+  background-color: gray; }
+
+.matrix-4 {
+  background-color: blue; }
+
 .flex {
   display: flex;
   flex-direction: row;

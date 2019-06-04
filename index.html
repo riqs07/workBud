@@ -79,6 +79,7 @@
 
 
                     <button class="button button-2" id = "createKanbanBtn">Kanban Board</button>
+                    <button class="button button-2" id = "createMatrix">Matrix </button>
                     <!-- <button class="button button-2">Start Project Timer</button>
                     <button class="button button-2">Task View</button> -->
                     <button class="button button-2" id = "projectAssignBtn">Assign Users</button>
@@ -88,7 +89,12 @@
                     <button class="button button-1" id = "projects__add">New Project</button>
                 </div>
 
-
+                <div class="matrix-grid">
+                    <div class="matrix-1">1</div>
+                    <div class="matrix-2">2</div>
+                    <div class="matrix-3">3</div>
+                    <div class="matrix-4">4</div>
+                </div>
 
 
             <div class="card">
@@ -146,9 +152,13 @@
                         <input type="text" name="" class="tasks__name-input input-text" placeholder="Enter Tasks">
                         
                         <select name="prioritySelect" class="tasks__select-priority input-select ">
-                            <option value="Low">Low</option>
-                            <option value="Medium">Medium</option>
-                            <option value="High">High</option>
+                            <option value="not important">Not Important</option>
+                            <option value="important">Important</option>
+                            
+                        </select>
+                        <select name="urgencySelect" class="tasks__select-urgency input-select ">
+                            <option value="not urgent">Not Urgent</option>
+                            <option value="urgent">Urgent</option>
                         </select>
 
                         <select name="difficultySelect" class="tasks__difficulty-priority input-select ">
