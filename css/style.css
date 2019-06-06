@@ -325,16 +325,16 @@
   grid-gap: 5px; }
 
 .matrix-1 {
-  background-color: red; }
+  background-color: #7EA625; }
 
 .matrix-2 {
-  background-color: green; }
+  background-color: #7EA625; }
 
 .matrix-3 {
-  background-color: gray; }
+  background-color: #8B1F61; }
 
 .matrix-4 {
-  background-color: blue; }
+  background-color: #8B1F61; }
 
 .flex {
   display: flex;

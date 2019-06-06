@@ -36,12 +36,16 @@ function getUsers(){
 
 
 function getTaskValues() {
+
+    // Dont like this function 
+
     name = tasksNameInput.value
-    priority = prioritySelect.value
+    importance = prioritySelect.value
     diffuculty = difficultySelect.value
+    urgency = urgencySelect.value
     dueDate = taskDatePicker.value
 
-    const newTask = new Task(name, priority, diffuculty, dueDate)
+    const newTask = new Task(name, importance,urgency, diffuculty, dueDate)
     return newTask
 }
 

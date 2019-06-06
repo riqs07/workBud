@@ -33,6 +33,8 @@ function getSelectors(){
     taskMigrateBtn = document.querySelector('#tasks__migrate')
 
     document.querySelector('#createKanbanBtn').addEventListener('click',createKanbanBoard)
+    document.querySelector('#createMatrix').addEventListener('click',createEisenhowerMatrix)
+
     
     
     taskEditBtn.addEventListener('click', editThisTask)
@@ -58,6 +60,8 @@ function getSelectors(){
     document.body.addEventListener('mouseover', kanbanUsersHover);
     document.body.addEventListener('click', kanbanCommentClick);
     document.body.addEventListener('mouseover', kanbanCalenderHover);
+
+    
     
     taskAddBtn.addEventListener('click', addTasks)
     projectsAddBtn.addEventListener('click', addProjects)

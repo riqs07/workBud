@@ -55,23 +55,20 @@
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
     grid-gap: 5px;
-
-   
-
 }
 
 .matrix{
     &-1{
-        background-color: red
+        background-color: $eisenhower-green;
     }
     &-2{
-        background-color: green
+        background-color: $eisenhower-green;
     }
     &-3{
-        background-color: gray
+        background-color: $eisenhower-red;
     }
     &-4{
-        background-color: blue
+        background-color: $eisenhower-red;
     }
 }
 

@@ -171,6 +171,9 @@ function showTask(task) {
 
 
     let color
+    let importanceColor
+    let urgencyColor
+
     switch (task.diffuculty) {
         case ('easy'):
             color = 'greenText'
@@ -183,14 +186,26 @@ function showTask(task) {
             break;
     }
 
-
+   
+    if (task.importance === 'important'){
+        importanceColor = 'blueText'
+    } else {
+        importanceColor = 'greenText'
+    }
+    
+   
+    if (task.urgency === 'urgent'){
+        urgencyColor = 'redText'
+    } else {
+        urgencyColor = 'greenText'
+    }
     
     /// Convert Due Date Time info to local String 
     component = `<ul class="collection">
     <li class="collection-child">This is a <span class = ${color}>${task.diffuculty}</span> task! </li>
     <li class="collection-child">${task.pomodoros.totalTime} mins worked</li>
     <li class="collection-child">Kanban Zone: ${task.progress}</li>
-    <li class="collection-child">${task.priority} priority </li>
+    <li class="collection-child">This task is <span class = '${importanceColor}'>${task.importance}</span> and <span class = ${urgencyColor}>${task.urgency}</span> </li>
     <li class="collection-child">Created on ${task.timeStamp.created.date}  </li>
     <li class="collection-child">Due on ${task.dueDate} </li>
    
@@ -223,11 +238,14 @@ function showProject() {
             li.id = task.id
             li.innerHTML = task.name
 
-            if (task.progress !== 'Done') {
-                li.style.borderBottom = "solid 2px #64b4f6"
+
+            if (task.progress == 'In Progress') {
+                li.style.borderBottom = "solid 2px #8B1F61"
 
             } else if (task.progress === 'Done') {
                 li.style.borderBottom = "solid 2px #67bb6b"
+            } else {
+                li.style.borderBottom = "solid 2px #64b4f6" 
             }
             taskList.appendChild(li)
         })
@@ -283,7 +301,7 @@ function createKanbanBoard() {
 
 
 function placeTasksintoKanban(array, column) {
-    array.forEach((task) => {
+    array.forEach(task => {
         comments = createCommentIcon()
         users = createUsersIcon()
         calender = createCalenderIcon()
@@ -298,6 +316,91 @@ function placeTasksintoKanban(array, column) {
         column.append(li)
     })
 }
+
+
+function createEisenhowerMatrix(){
+    let urgent = []
+    let notUrgent = []
+
+
+    let q1 = []
+    let q2 = []
+    let q3 = []
+    let q4 = []
+
+    folder = getCurrentProjectFolderinData()
+
+
+    folder.tasks.forEach( task => {
+
+        switch (task.urgency) {
+            case 'not urgent':
+            urgent.push(task)
+            break;
+
+            case 'urgent':
+            notUrgent.push(task)
+            break;
+        }
+
+    })
+
+
+    urgent.forEach(task =>{
+        switch (task.importance) {
+            case 'not important':
+                q1.push(task)
+                break;
+
+            case 'important':
+                q2.push(task)
+                break;
+
+        }  
+    })
+
+    notUrgent.forEach(task =>{
+        switch (task.importance) {
+            case 'not important':
+                q3.push(task)
+                break;
+
+            case 'important':
+                q4.push(task)
+                break;
+
+        }  
+    })
+
+    quadrant1 = document.querySelector('.matrix-1')
+    quadrant2 = document.querySelector('.matrix-2')
+    quadrant3 = document.querySelector('.matrix-3')
+    quadrant4 = document.querySelector('.matrix-4')
+
+    placeTasksintoMatrix(q1,quadrant1)
+    placeTasksintoMatrix(q2,quadrant2)
+    placeTasksintoMatrix(q3,quadrant3)
+    placeTasksintoMatrix(q4,quadrant4)
+}
+
+
+function placeTasksintoMatrix(array,quadrant){
+    ul = document.createElement('ul')
+    ul.classList.add('collection')
+    array.forEach(task => {
+        
+        li = createListItem()
+        li.classList.add('matrixCard') 
+        li.id = task.id 
+        li.innerHTML = task.name
+
+        ul.append(li)
+        quadrant.append(ul)
+    })
+}
+
+
+
 
 function addUsersToProjectUI() {
 
