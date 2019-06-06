@@ -1,2 +1,2 @@
 # workBud
-Task/ Project Management
+A robust personal/project management application 
