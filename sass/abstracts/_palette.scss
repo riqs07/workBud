@@ -18,6 +18,36 @@ $blue-d1:hsl(212, 89%, 60%);
 
 
 
+$coral: hsl(359, 100%, 67%);	// Main Primary coral */
+$coral-l2: hsl(358, 100%, 87%);
+$coral-l1: hsl(359, 100%, 76%);
+$coral-d1: hsl(358, 100%, 59%);
+$coral-intense: hsl(358, 100%, 50%);
+
+$skyblue: hsl(221, 100%, 71%);	// Main Secondary skyblue (1) */
+$skyblue-l2: hsl(221, 100%, 88%);
+$skyblue-l1: hsl(221, 100%, 78%);
+$skyblue-d1: hsl(221, 100%, 63%);
+$skyblue-intense: hsl(221, 97%, 54%);
+
+$yellow: #FFFE58;	// Main or (2) */
+$yellow-l2: #FFFFBC;
+$yellow-l1: #FFFE84;
+$yellow-d1: #FFFE2C;
+$yellow-intense: #FFFD00;
+
+
+
+.coral{background-color: $coral}
+.coral-l2{background-color: $coral-l2}
+.coral-d1{background-color: $coral-d1}
+.coral-intense{background-color: $coral-intense}
+
+.skyblue{background-color: $skyblue}
+.skyblue-l2{background-color: $skyblue-l2}
+.skyblue-d1{background-color: $skyblue-d1}
+.skyblue-intense{background-color: $skyblue-intense}
+
 .green{background-color:$green}
 .red{background-color: $red}
 .blue{background-color: $blue}

@@ -13,7 +13,13 @@ function findTaskInProjectFolder(taskID,projectID){
     return taskInData
 }
 
+function findUser(id){
+   user = data.people.find(user =>{
+        return user.id = id
+    })
 
+    return user
+}
 
 function getCurrentProjectFolderinData(){
     id = getCurrentProjectID()

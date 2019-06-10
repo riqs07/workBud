@@ -20,6 +20,22 @@ function getProjectStorage() {
 
 }
 
+function getUserStorage(){
+    usersInStorage = checkUserStorage()
+
+    let storage
+
+    if (usersInStorage === true) {
+        storage = JSON.parse(localStorage.getItem('people'))
+    } else {
+        storage = []
+
+    }
+    return storage
+
+
+}
+
 // function printTaskStorage() {
 // // Legacy
 //     if (data.currentProject.task !== null) {
@@ -70,6 +86,16 @@ function printProjectStorage() {
 function checkProjectStorage() {
 
     isStored = localStorage.getItem('projectStorage')
+
+    if (isStored === null) {
+        return false
+    } else {
+        return true;
+    }
+}
+function checkUserStorage() {
+
+    isStored = localStorage.getItem('people')
 
     if (isStored === null) {
         return false
@@ -128,6 +154,6 @@ function storeProject(newProject) {
 
 function updateStorage(){
     localStorage.setItem('projectStorage',JSON.stringify(data.projects))
-    localStorage.setItem('users',JSON.stringify(data.users))
+    localStorage.setItem('people',JSON.stringify(data.people))
 }
 

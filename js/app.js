@@ -18,7 +18,7 @@ function getSelectors(){
     projectsAssignBtn = document.querySelector('#projectAssignBtn')
     
     
-    projectsAssignBtn.addEventListener('click',addUsersToProjectClick)
+    projectsAssignBtn.addEventListener('click',addUsersClick)
     
     document.querySelector('.tasks__edit-state--buttons').style.display = "none"
     
@@ -30,7 +30,7 @@ function getSelectors(){
     taskCompleteBtn = document.querySelector('#tasks__complete')
     taskBackBtn = document.querySelector('#tasks__back')
     taskProgressBtn = document.querySelector('#tasks__progress')
-    taskMigrateBtn = document.querySelector('#tasks__migrate')
+    taskMoveBtn = document.querySelector('#tasks__move')
 
     document.querySelector('#createKanbanBtn').addEventListener('click',createKanbanBoard)
     document.querySelector('#createMatrix').addEventListener('click',createEisenhowerMatrix)
@@ -38,12 +38,12 @@ function getSelectors(){
     
     
     taskEditBtn.addEventListener('click', editThisTask)
-    taskDeleteBtn.addEventListener('click', deleteThisTask)
-    taskMigrateBtn.addEventListener('click', migrateThisTaskClick)
-    taskAssignBtn.addEventListener('click', addUsersToTasksClick)
+    taskDeleteBtn.addEventListener('click', deleteTaskClick)
+    taskMoveBtn.addEventListener('click', moveThisTaskUI)
+    taskAssignBtn.addEventListener('click', addUserToTasksUI)
     taskCommentBtn.addEventListener('click', createInputsForComment)
     // taskPomodoroBtn.addEventListener('click',showPomodoroUI)
-    taskCompleteBtn.addEventListener('click', completeThisTask)
+    taskCompleteBtn.addEventListener('click', completeThisTaskClick)
     taskBackBtn.addEventListener('click',goBackToTaskList)
     taskProgressBtn.addEventListener('click',changeTaskProgressUI)
     
@@ -73,33 +73,151 @@ function init() {
     getSelectors()
     data.projects = getProjectStorage();
     data.currentProject = getCurrentProjectFromStorage()
+    data.people = getUserStorage()
     showProject()
     printProjectStorage()
 }
 
 
-function addUsersToProjectClick(){
+function addUsersClick(){
     //okay if this function just calls another function 
     // then just have click event attached to that one
     // will leave it here for now 
-     addUsersToProjectUI()
+     addUsersUI()
 }
 
 
-function addUsersToTasksClick(){
+function addUsersToTasksSumbit(){
     // rename to user ui 
     // just shows a list of currently assigned users 
     // user ui can assign pic to user
     // assign user to task 
     // remove user from task 
     // prob have an assign user btn that opens up that specific ui
-      addUserToTasksUI()
   
+    id = document.querySelector('#userList').value
+    user = findUser(id)
+    task = getCurrentTaskinData()
+
+    short = {
+        id:task.id,
+        name:task.name,
+        timeWorked:null
+    }
+
+    // add error handling adn duplicate check 
+    // and possibly make into a seperate function
+
+
+    user.tasks.push(short)
+    task.users.push(user)
+    
+   showToast('User assigned to Task','success')
+   updateStorage() 
+    
   }
 
-  function migrateThisTaskClick(){
-      migrateThisTaskUI()
+
+
+  function moveThisTaskSubmit(){
+   destinationFolderID = document.querySelector('#projectList').value
+   destinationFolder = findProjectInData(destinationFolderID)
+  
+   currentFolder = getCurrentProjectFolderinData()
+
+
+   taskID = getCurrentTaskID()
+   task = getCurrentTaskinData()
+
+    // could even have an add task function which takes in 
+    // folder and task 
+   destinationFolder.tasks.push(task)
+
+
+   deleteThisTask(taskID,currentFolder)
+
+   goBackToTaskList()
+   showToast('Task Moved','success')
+   updateStorage()
+
   }
+
+  function commentProjectClick(){
+    folder = getCurrentProjectFolderinData()
+    commentThisProject(folder)
+      // add a delay or animation 
+      // A UI  Function
+      document.querySelector('#new-textbox').remove()
+      document.querySelector('#submit-comment').remove()
+      //
+      showToast('Comment Added','success')
+      updateData()
+
+  }
+
+  function commentTaskSubmit(){
+    task = getCurrentTaskinData()
+    text = document.querySelector('#new-textbox').value
+
+    commentThisTask(task,text)
+   
+    // Move to a UI function 
+    document.querySelector('#new-textbox').remove()
+    document.querySelector('#submit-comment').remove()
+
+    showToast('Comment Added','success')
+    updateStorage()
+
+  }
+
+
+  function deleteTaskClick(){
+    taskID = getCurrentTaskID()
+    folder = getCurrentProjectFolderinData()
+
+    deleteThisTask(taskID,folder)
+
+   showToast('Task Deleted','success')
+   goBackToTaskList()
+   updateStorage()
+
+  }
+
+function completeThisTaskClick(){
+    task = getCurrentTaskinData()
+    folder = getCurrentProjectFolderinData()
+
+    completeThisTask(task,folder)
+    showToast('Task Completed','success')
+    updateStorage()
+
+}
+
+function changeTaskProgressSubmit(){
+
+    task = getCurrentTaskinData()
+    
+    select = document.querySelector('#progress-select')
+    sumbit = document.querySelector('#submit-progress')
+
+    newProgress = select.value
+
+    if (newProgress === "Done"){
+        completeThisTask()
+    } else {
+        task.progress = newProgress
+        updateStorage()
+        showToast('Progress Updated','success')
+    
+    }
+
+    // setInterval(()=>{
+    //     select.remove()
+    //     sumbit.remove()
+    // },400) 
+  
+
+}
 
 document.addEventListener('DOMContentLoaded', init, false);
 

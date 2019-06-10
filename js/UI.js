@@ -69,10 +69,10 @@ function kanbanCommentClick(e){
         textBox.classList.add('input-text')  
         textBox.type = 'text'
     
-    
         sumbit = document.createElement('button')
-        sumbit.classList.add('button', 'button-1')
+        sumbit.classList.add('button', 'button-1','kbCsubmit')
         sumbit.innerHTML = 'Submit'
+        submit.addEventListener('click',foo)
         
 
         //place holder append as i need to figure out how its gonna show
@@ -81,6 +81,11 @@ function kanbanCommentClick(e){
         document.querySelector('#anchor').append(textBox,sumbit)
 
     }
+}
+
+function foo(){
+    x = document.querySelector('.kbCsubmit').value
+    commentThisTask(task,x)
 }
 
 function kanbanCalenderHover(e){
@@ -402,7 +407,7 @@ function placeTasksintoMatrix(array,quadrant){
 
 
 
-function addUsersToProjectUI() {
+function addUsersUI() {
 
     // Make this a function in UI 
     // also search DOM for textboxID and if it exists dont print another
@@ -433,7 +438,14 @@ function addUsersToProjectUI() {
     // add a cancel button that also deletes created inputs
     // sumbit/add is disabled until textbox is typed in 
 
-    sumbit.addEventListener('click', addUserToProjectInData)
+    sumbit.addEventListener('click', () =>{
+        name = document.querySelector('#addUserTextBox').value
+        if (name != ""){
+            addUser(name)
+        } else {
+            showToast('Please Enter a value','warning')
+        }
+    })
 
     projectInfoPanel = document.querySelector('.tasks__project--panel')
 
@@ -479,7 +491,7 @@ function addUserToTasksUI(){
     // cancel.classList.add('button','button-1',)
     // cancel.innerHTML = 'Cancel'
 
-    addUser.addEventListener('click',addUserToTaskInData)
+    addUser.addEventListener('click',addUsersToTasksSumbit)
 
 
     editStateBack = document.createElement('button')
@@ -517,9 +529,8 @@ function addUserToTasksUI(){
 
      parent.before(usersContainer)
 
-    folder = getCurrentProjectFolderinData()
  
-    folder.users.forEach(user =>{
+    data.people.forEach(user =>{
         li = createListItem()
 
         //get appenmd delete ICON WORKING 
@@ -532,7 +543,7 @@ function addUserToTasksUI(){
 
 
     // Not sure what im going to need select for but whatever
-    folder.users.forEach((user)=>{
+    data.people.forEach((user)=>{
         document.querySelector('#userList').innerHTML +=
         `<option value="${user.id}">${user.name}</option`
     })
@@ -566,7 +577,7 @@ function changeTaskProgressUI(){
     sumbit.id = 'submit-progress'
     sumbit.classList = 'button button-1'
 
-    sumbit.addEventListener('click',submitChangeTaskProgress)
+    sumbit.addEventListener('click',changeTaskProgressSubmit)
 
     taskInfoPanel = document.querySelector('.tasks__selected-task--info')
 
@@ -575,14 +586,15 @@ function changeTaskProgressUI(){
     parent.insertBefore(select,taskInfoPanel)
     parent.insertBefore(sumbit,taskInfoPanel)
 }
-function migrateThisTaskUI(){
+function moveThisTaskUI(){
 
     taskInfoPanel = document.querySelector('.tasks__selected-task--info')
 
 
     sumbit = document.createElement('button')
     sumbit.classList.add('button','button-1')
-       sumbit.textContent = 'Submit'
+    sumbit.textContent = 'Submit'
+    sumbit.addEventListener('click',moveThisTaskSubmit)
 
     //THis is making it throw and ERROR IDK 
     // submit.addEventListener('click',migrateThisTask)
@@ -613,12 +625,15 @@ function createInputsForComment() {
     textBox.id = 'new-textbox'
     textBox.className = 'input-textArea'
     // Something funky is going on with CSS HOVER 
+    // Unify all the created Elements so i can have
+    // one set of functions to get their values
+    // and also limit the amount of created ones 
 
     sumbit.innerHTML = 'Submit'
     sumbit.id = 'submit-comment'
     sumbit.classList = 'button button-1'
 
-    sumbit.addEventListener('click', commentThisTask)
+    sumbit.addEventListener('click', commentTaskSubmit)
 
     taskInfoPanel = document.querySelector('.tasks__selected-task--info')
 

@@ -1,6 +1,6 @@
 data = {
-    users: [],
     projects: [],
+    people:[],
     currentTask: null,
     currentProject: null
 }
@@ -59,6 +59,7 @@ class Project {
             totalPomdoros: null
         }
         this.users = []
+        this.mileStones = []
         this.timeStamp = {
             created:{
                 date: d.toLocaleDateString(),

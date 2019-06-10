@@ -58,10 +58,10 @@ function editThisTask() {
     `<input type="text" name="" id="" placeholder =${task.name}>`
 }
 
-function deleteThisTask() {
+function deleteThisTask(taskID,folder) {
     
-    taskID = getCurrentTaskID()
-    folder = getCurrentProjectFolderinData()
+    // taskID = getCurrentTaskID()
+    // folder = getCurrentProjectFolderinData()
 
    index = folder.tasks.findIndex(task => {
        return task.id === taskID
@@ -69,9 +69,9 @@ function deleteThisTask() {
 
    folder.tasks.splice(index,1)
 
-   showToast('Task Deleted','success')
-   goBackToTaskList()
-   updateStorage()
+//    showToast('Task Deleted','success')
+//    goBackToTaskList()
+//    updateStorage()
 
 }
 
@@ -94,38 +94,47 @@ function removeCreatedInputs(){
 console.log('Placeholder for Inputs Removed')
 }
 
-function addUserToProjectInData(){
-
-    name = document.querySelector('#addUserTextBox').value
-
-    folder = getCurrentProjectFolderinData()
-    allUsers = getUsers()
-
-    if (name != ""){
+function addUser(name){
         user = new User(name)
 
+        data.people.push(user)
+
+        // pushing to all will be another funciton where you can add global users
+        // gonna leave it for now 
+        // Tinker with adding user to own data 
+        // and pull from their vs the folder.users
+        updateStorage()
+        showToast('User Added to project','success')
+}
+
+function addUserToProjectInData(user,folder){
+    // select froma list 
+    // select value id 
+    // use to find in users folder 
+    // add user to that folder 
+         name = document.querySelector('#addUserTextBox').value
+
+        addUser(name)
         folder.users.push(user)
         // pushing to all will be another funciton where you can add global users
         // gonna leave it for now 
-        data.users.push(user)
         // Tinker with adding user to own data 
         // and pull from their vs the folder.users
-        
+        removeCreatedInputs()
+
         updateStorage()
         removeCreatedInputs()
         showToast('User Added to project','success')
-    } else {
-        showToast('Please Enter a value','warning')
-    }
+   
     }
   
 
 function addUserToTaskInData(){
     id = document.querySelector('#userList').value
 
-    folder = getCurrentProjectFolderinData()
     task = getCurrentTaskinData()
-
+    user = findUser(id)
+    
     // grab from all users 
     // folder is placeholder
     //mutate from all users not from folder
@@ -134,12 +143,8 @@ function addUserToTaskInData(){
     // for some reason this is always g
     // only updating with one name 
     // its like rewriting the rest of the users 
-   user = folder.users.find(user =>{
-        return id = user.id
-        
-    })
+   
 
-    console.log(id,user)
 
     short = {
         id:task.id,
@@ -149,6 +154,7 @@ function addUserToTaskInData(){
 
     // add error handling  adn duplicate check 
     // and possibly make into a seperate function
+    console.log(short,task,user)
 
 
     user.tasks.push(short)
@@ -158,51 +164,44 @@ function addUserToTaskInData(){
    updateStorage() 
 }
 
-function commentThisProject() {  
+function commentThisProject(folder) {  
     // add btn handler for this function
-    folder = getCurrentProjectFolderinData()
+    // folder = getCurrentProjectFolderinData()
     text = document.querySelector('#new-textbox').value
     folder.comments.push(text)
 
-    // add a delay or animation 
-    document.querySelector('#new-textbox').remove()
-    document.querySelector('#submit-comment').remove()
+    // // add a delay or animation 
+    // document.querySelector('#new-textbox').remove()
+    // document.querySelector('#submit-comment').remove()
 
     showToast('Comment Added','success')
     updateData()
 }
 
-function commentThisTask() {  
-    task = getCurrentTaskinData()
-    text = document.querySelector('#new-textbox').value
+function commentThisTask(task,text) {  
+    // task = getCurrentTaskinData()
+    // text = document.querySelector('#new-textbox').value
     task.comments.push(text)
 
     // add a delay or animation 
-    document.querySelector('#new-textbox').remove()
-    document.querySelector('#submit-comment').remove()
+    // document.querySelector('#new-textbox').remove()
+    // document.querySelector('#submit-comment').remove()
 
-    showToast('Comment Added','success')
-    updateData()
+    // showToast('Comment Added','success')
+    // updateData()
 }
 
 
-function completeThisTask() {
-   
-    currentTask = getCurrentTaskinData()
-    folder = getCurrentProjectFolderinData()
+function completeThisTask(task,folder) {
 
-    currentTask.isCompleted = true;
-    currentTask.progress = "Done"
-
-    completeThisTaskTimeStamp(task)
-
-    alreadyInArchive = folder.archive.includes(currentTask)
+    alreadyInArchive = folder.archive.includes(task)
 
     if (alreadyInArchive === false){
         folder.archive.push(task)
-        showToast('Task Completed','success')
-        updateStorage()
-
+        task.isCompleted = true;
+        task.progress = "Done"
+        completeThisTaskTimeStamp(task)
+      
 
     } else if (alreadyInArchive = true) {
         showToast('Task has already been completed','warning')
@@ -228,31 +227,7 @@ function completeThisTaskTimeStamp(task){
 }
 
 
-function submitChangeTaskProgress(){
 
-    task = getCurrentTaskinData()
-    
-    select = document.querySelector('#progress-select')
-    sumbit = document.querySelector('#submit-progress')
-
-    newProgress = select.value
-
-    if (newProgress === "Done"){
-        completeThisTask()
-    } else {
-        task.progress = newProgress
-        updateStorage()
-        showToast('Progress Updated','success')
-    
-    }
-
-    // setInterval(()=>{
-    //     select.remove()
-    //     sumbit.remove()
-    // },400) 
-  
-
-}
 
 
 
