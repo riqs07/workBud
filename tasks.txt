@@ -180,3 +180,25 @@ LINE 79 data.js
     and i would be able to call it from Kanbancommentclick but i cant since its doing a whole bunch of wonky stuff
     
 
+6-11 task app study
+possibly make timeline and burndown charts for each project 
+can make days worked streak 
+can make the projects tab not a card but a side menu 
+
+have multiple timer options pomodoro timer countdown etc and keep time track system for each
+
+ok for timer,
+user click timer on task view----> has options for pomodoro timer and countdown
+--> each are slighlyy diffrent but add to time spent 
+
+the user time spent thing i dont think i can get working until i know back end stuff otherwise
+it would just be like THIS user times spent but idk 
+
+
+timer view -- start, pause , complete 
+on complete adds time in seconds to projects worked 
+
+counntdown view --- select countdown time 
+from their its timer view
+
+// focus modee check box dims screen and has no back button

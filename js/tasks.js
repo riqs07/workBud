@@ -134,18 +134,7 @@ function addUserToTaskInData(){
 
     task = getCurrentTaskinData()
     user = findUser(id)
-    
-    // grab from all users 
-    // folder is placeholder
-    //mutate from all users not from folder
-    // get better name than shrt
-
-    // for some reason this is always g
-    // only updating with one name 
-    // its like rewriting the rest of the users 
-   
-
-
+        
     short = {
         id:task.id,
         name:task.name,
@@ -154,8 +143,6 @@ function addUserToTaskInData(){
 
     // add error handling  adn duplicate check 
     // and possibly make into a seperate function
-    console.log(short,task,user)
-
 
     user.tasks.push(short)
     task.users.push(user)
@@ -179,16 +166,7 @@ function commentThisProject(folder) {
 }
 
 function commentThisTask(task,text) {  
-    // task = getCurrentTaskinData()
-    // text = document.querySelector('#new-textbox').value
     task.comments.push(text)
-
-    // add a delay or animation 
-    // document.querySelector('#new-textbox').remove()
-    // document.querySelector('#submit-comment').remove()
-
-    // showToast('Comment Added','success')
-    // updateData()
 }
 
 

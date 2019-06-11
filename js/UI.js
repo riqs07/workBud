@@ -72,7 +72,9 @@ function kanbanCommentClick(e){
         sumbit = document.createElement('button')
         sumbit.classList.add('button', 'button-1','kbCsubmit')
         sumbit.innerHTML = 'Submit'
-        submit.addEventListener('click',foo)
+        // submit.addEventListener('click',()=>{
+        //     foo(task)
+        // })
         
 
         //place holder append as i need to figure out how its gonna show
@@ -83,8 +85,12 @@ function kanbanCommentClick(e){
     }
 }
 
-function foo(){
+
+
+
+function foo(task){
     x = document.querySelector('.kbCsubmit').value
+    console.log(x)
     commentThisTask(task,x)
 }
 
