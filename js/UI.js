@@ -150,6 +150,10 @@ function showToast(text, type) {
         case 'warning':
             color = 'red';
             break;
+
+        case 'notification':
+            color = 'skyblue';
+            break;
     }
 
 
@@ -214,7 +218,7 @@ function showTask(task) {
     /// Convert Due Date Time info to local String 
     component = `<ul class="collection">
     <li class="collection-child">This is a <span class = ${color}>${task.diffuculty}</span> task! </li>
-    <li class="collection-child">${task.pomodoros.totalTime} mins worked</li>
+    <li class="collection-child">$task.pomodoros.totalTime} mins worked</li>
     <li class="collection-child">Kanban Zone: ${task.progress}</li>
     <li class="collection-child">This task is <span class = '${importanceColor}'>${task.importance}</span> and <span class = ${urgencyColor}>${task.urgency}</span> </li>
     <li class="collection-child">Created on ${task.timeStamp.created.date}  </li>
@@ -622,6 +626,22 @@ function moveThisTaskUI(){
   
 
 }
+
+
+
+function taskViewHide(){
+    taskInfoPanel = document.querySelector('.tasks__selected-task--info')
+    taskInfoPanel.style.display = "none"
+    document.querySelector('.tasks__edit-state--buttons').style.display = "none"
+}
+
+function  taskViewShow(){
+    taskInfoPanel = document.querySelector('.tasks__selected-task--info')
+    taskInfoPanel.style.display = "block"
+    document.querySelector('.tasks__edit-state--buttons').style.display = "block"
+    }
+
+
 
 function createInputsForComment() {
     // MOVE TO UI 

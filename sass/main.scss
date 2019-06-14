@@ -96,3 +96,11 @@
     transform-origin: 50% 0%;
     visibility: hidden;
 }
+
+.timers{
+
+  &__clock{
+    font-size: 2em;
+    @include centerX
+  }
+}

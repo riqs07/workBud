@@ -2,7 +2,8 @@ data = {
     projects: [],
     people:[],
     currentTask: null,
-    currentProject: null
+    currentProject: null,
+    currentUser:null
 }
 
 
@@ -27,17 +28,21 @@ class Task {
             day: d.getDay(),
             month: d.getMonth()
         },
-         completed: {
+        duration:{
+            pomodoros: {
+                totalTime: 0,
+                completedPomodoros: 0,
+            },
+            totalTimeWorked:0
+        },
+        completed: {
             date: null,
             time: null,
             day: null,
             month: null
         }
+
     }
-        this.pomodoros = {
-            totalTime: 0,
-            totalPomodoros: 0,
-        }
         this.isCompleted = false;
         this.progress = 'Task Backlog';
         this.comments = []

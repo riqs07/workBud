@@ -1,3 +1,6 @@
+.lime {
+  background-color: #b9d56f; }
+
 .coral {
   background-color: #ff575a; }
 
@@ -455,3 +458,9 @@ body {
   z-index: -1;
   transform-origin: 50% 0%;
   visibility: hidden; }
+
+.timers__clock {
+  font-size: 2em;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%); }

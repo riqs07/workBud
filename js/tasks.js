@@ -75,7 +75,6 @@ function deleteThisTask(taskID,folder) {
 
 }
 
-
 function migrateThisTask() {
 
     destinationFolderID = document.querySelector('#projectList').value
