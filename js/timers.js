@@ -133,12 +133,11 @@ function showCountDown(){
     stop = document.querySelector('#countDown-stop')
 
 
-    start.addEventListener('click', startCountDownTimer)
+    start.addEventListener('click', startCountDownTimerClick)
     // pause.addEventListener('click',pausePomodoro)
     stop.addEventListener('click', stopCountDownTimer)
 
 
-    console.log('hello')
 }
 
 function startStopWatchTimer(){
@@ -255,36 +254,70 @@ function pausePomodoroBreakTimer(){
 
 }
 
+function startCountDownTimerClick(){
 
 
+    maxTime = document.querySelector('#countDownLengthSelect').value
+    timer = document.querySelector('.timers__clock')
 
-function startCountDownTimer(){
+
+    start.removeEventListener("click", startCountDownTimer);
+    start.addEventListener("click", pauseCountDownTimer);
+    start.textContent = "Pause";
+
+
+    startCountDownTimer(maxTime)
+}
+
+
+function startCountDownTimer(time){
     // make it so i can add a value on timer click 
     // like the google stopwatch 
-    timeLeft = document.querySelector('#countDownLengthSelect').value
-    maxTime = timeLeft
-
-    timer = document.querySelector('.timers__clock')
-    
+    // this shoudl take in time left to allow a pause button to only
+    // call the countodwn 
+    timeLeft = parseInt(time)
 
     countDown = setInterval(()=>{
         if (timeLeft > 0){
             timeLeft--
+
         } else if (timeLeft === 0){
             clearInterval(countDown)
-            showToast('MVC placeholder','notification')
-            addToTotalTimeWorked(maxTime)
+                showToast('MVC placeholder','notification')
         }
         timer.innerHTML = convertSeconds(timeLeft)
 
     },1000)
-    console.log('goo')
 
 
 }
 
 function stopCountDownTimer(){
+  clearInterval(countDown)
 
+  console.log(maxTime,timeLeft)
+  if (timeLeft === 0){
+    addToTotalTimeWorked(maxTime)
+  } else if (timeLeft > 0){
+    addToTotalTimeWorked(timeLeft)
+
+  }
+
+}
+
+function pauseCountDownTimer(){
+    clearInterval(countDown)
+
+    start.removeEventListener("click", pauseCountDownTimer);
+    start.addEventListener("click", unpauseCountDownTimer);
+    start.textContent = "Pause";
+}
+
+function unpauseCountDownTimer(){
+     startCountDownTimer(timeLeft)
+     start.removeEventListener("click", unpauseCountDownTimer);
+    start.addEventListener("click", pauseCountDownTimer);
+    start.textContent = "Start";
 }
 
 
@@ -307,10 +340,24 @@ function addTimeWorkedtoPomodoro(timeStamp, time, completed) {
 
 function addToTotalTimeWorked(time){
     task = getCurrentTaskinData()
+    
     time = parseInt(time)
     task.timeStamp.duration.totalTimeWorked += time
+    updateProjectTimeWorked()
     updateStorage()
 
+}
+
+function updateProjectTimeWorked(){
+    folder = getCurrentProjectFolderinData()
+
+    let projectTime = 0
+
+    folder.tasks.forEach(task =>{
+        projectTime += parseInt(task.timeStamp.duration.totalTimeWorked)
+    })
+
+    folder.timeStamp.duration.totalTimeWorked = projectTime
 }
 
 function getPomodoroBlueprint() {
@@ -358,7 +405,6 @@ function getCountDownBlueprint() {
      <div class="card">
     <div class="timers__clock">CountDown</div>
     <button class="button button-1" id = "countDown-start">Start</button>
-    <button class="button button-2" id = "countDown-pause">Pause</button>
     <button class="button button-2" id = "countDown-stop">Stop</button>
 
     <select name="countDownLengthSelect" id="countDownLengthSelect" class = "input-select">

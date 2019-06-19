@@ -31,6 +31,7 @@ function getSelectors(){
     taskBackBtn = document.querySelector('#tasks__back')
     taskProgressBtn = document.querySelector('#tasks__progress')
     taskMoveBtn = document.querySelector('#tasks__move')
+    taskStatsBtn = document.querySelector('#tasks__stats')
 
     document.querySelector('#createKanbanBtn').addEventListener('click',createKanbanBoard)
     document.querySelector('#createMatrix').addEventListener('click',createEisenhowerMatrix)
@@ -46,6 +47,8 @@ function getSelectors(){
     taskCompleteBtn.addEventListener('click', completeThisTaskClick)
     taskBackBtn.addEventListener('click',goBackToTaskList)
     taskProgressBtn.addEventListener('click',changeTaskProgressUI)
+
+    taskStatsBtn.addEventListener('click',statsClick)
     
 
 
@@ -218,6 +221,11 @@ function changeTaskProgressSubmit(){
     // },400) 
   
 
+}
+
+function statsClick(){
+    folder = getCurrentProjectFolderinData()
+    doughnutTaskTimeWorked(folder)
 }
 
 document.addEventListener('DOMContentLoaded', init, false);

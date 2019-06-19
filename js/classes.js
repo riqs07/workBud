@@ -59,26 +59,27 @@ class Project {
         this.tasks = []
         this.archive = []
         this.comments = []
-        this.pomodoros = {
-            totalTime: null,
-            totalPomdoros: null
-        }
         this.users = []
         this.mileStones = []
         this.timeStamp = {
+
             created:{
                 date: d.toLocaleDateString(),
-                time: d.toLocaleTimeString(),
-                day: d.getDay(),
-                month: d.getMonth()
-            },
-            completed: {
-                date: null,
-                time: null,
-                day: null,
-                month: null
-            }
+            time: d.toLocaleTimeString(),
+            day: d.getDay(),
+            month: d.getMonth()
+        },
+        duration:{
+           totalTimeWorked:0
+        },
+        completed: {
+            date: null,
+            time: null,
+            day: null,
+            month: null
         }
+
+    }
 
     }
 }
