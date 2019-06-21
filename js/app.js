@@ -230,3 +230,8 @@ function statsClick(){
 
 document.addEventListener('DOMContentLoaded', init, false);
 
+function message(){
+
+    msg = ' This is the working enviroment for citrus, its not very pretty right now but a lot of the functionality is there! Check Github for commits and current Issues'
+    console.log(msg)
+}
