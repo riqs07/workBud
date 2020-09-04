@@ -12,7 +12,7 @@
   "dependencies": {
     "chart.js": "^2.8.0",
     "materialize-css": "^1.0.0",
-    "node-sass": "^4.11.0"
+    "node-sass": "^4.13.1"
   },
   "devDependencies": {
     "jest": "^24.8.0"
